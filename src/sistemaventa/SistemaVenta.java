@@ -16,6 +16,8 @@ public class SistemaVenta {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        vista.Login ventana = new vista.Login();
+        ventana.setVisible(true);
     }
     
 }
