@@ -63,31 +63,6 @@ public class database {
     return resultado;
     }
     
-    public static int agregarProducto(int cd, String name, String detalle, int udm, float precio, float base) throws SQLException{
-    Conexion conexion = new Conexion();
-    Connection con=conexion.getConnection();
-    int resultado = 0;
-    String SQL = "INSERT INTO `productos`(`cdproducto`, `name`, `detalle`, `udm`, `precio`, `base`) VALUES (?,?,?,?,?,?)";
-     PreparedStatement pst=null;
-    try{
-    pst = con.prepareStatement(SQL);
-    pst.setInt(1, cd);
-    pst.setString(2, name);
-    pst.setString(3, detalle);
-    pst.setInt(4, udm);
-    pst.setFloat(5, precio);
-    pst.setFloat(6, base);
-    pst.executeUpdate();
-    }
-    catch(SQLException ex){
-        resultado = 1;
-        System.out.println("Error al agregar"+ ex.getMessage());
-    }
-    return resultado;
-    }
-    
-    
-    
     public static int agregarUsuario(String usuario, String password, int rol) throws SQLException{
     Conexion conexion = new Conexion();
     Connection con=conexion.getConnection();
