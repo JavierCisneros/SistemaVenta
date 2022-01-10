@@ -16,17 +16,19 @@ public class Productos {
     private int udm;
     private float precio;
     private float base; 
+    private float stock;
 
     public Productos() {
     }
 
-    public Productos(int cd, String name, String detalle, int udm, float precio, float base) {
+    public Productos(int cd, String name, String detalle, int udm, float precio, float base, float stock) {
         this.cd = cd;
         this.name = name;
         this.detalle = detalle;
         this.udm = udm;
         this.precio = precio;
         this.base = base;
+        this.stock = stock;
     }
     
 
@@ -76,6 +78,14 @@ public class Productos {
 
     public void setBase(float base) {
         this.base = base;
+    }
+
+    public float getStock() {
+        return stock;
+    }
+
+    public void setStock(float stock) {
+        this.stock = stock;
     }
             
     
