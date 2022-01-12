@@ -25,6 +25,7 @@ import modelo.Compra;
 import modelo.CompraDB;
 import modelo.Derivados;
 import modelo.DerivadosDB;
+import modelo.DetalleCompra;
 import modelo.Productos;
 import modelo.ProductosDB;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
@@ -49,7 +50,10 @@ public class sistema extends javax.swing.JFrame {
     ArrayList codigos = new ArrayList();
     Compra c = new Compra();
     CompraDB cdb = new CompraDB();
-        
+    DetalleCompra cd = new DetalleCompra();
+    int item;
+    float totalpagar;
+    DefaultTableModel tmp;
     public sistema() {
         initComponents();
         String rol;
@@ -71,9 +75,7 @@ public class sistema extends javax.swing.JFrame {
         
         pdb.ConsulatarProducto(jcbProductos);
         pdb.ConsulatarCodigos(codigos);
-        pdb.ConsulatarProducto(jcbComprasP);
         AutoCompleteDecorator.decorate(jcbProductos );
-        AutoCompleteDecorator.decorate(jcbComprasP);
     }
 
     /**
@@ -114,7 +116,6 @@ public class sistema extends javax.swing.JFrame {
         jtfDetalle = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jcbUnidad = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         jtfPrecio = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jtfBase = new javax.swing.JTextField();
@@ -126,6 +127,7 @@ public class sistema extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtableP = new javax.swing.JTable();
         jLabel15 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -145,16 +147,21 @@ public class sistema extends javax.swing.JFrame {
         jcbProductos = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
-        jcbComprasP = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jtfPrecioC = new javax.swing.JTextField();
+        jtfCantidadC = new javax.swing.JTextField();
+        btnAgregarC = new javax.swing.JButton();
+        jtfEliminarC = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtCompra = new javax.swing.JTable();
+        bntRegC = new javax.swing.JButton();
+        jLabel22 = new javax.swing.JLabel();
+        jtfNombreC = new javax.swing.JTextField();
+        jtfCodigoC = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jtfTotalC = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jlbSeccion = new javax.swing.JLabel();
@@ -315,29 +322,25 @@ public class sistema extends javax.swing.JFrame {
                 jcbUnidadKeyPressed(evt);
             }
         });
-        jPanel2.add(jcbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 248, 125, -1));
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Precio");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 286, -1, -1));
+        jPanel2.add(jcbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 125, -1));
 
         jtfPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfPrecioKeyPressed(evt);
             }
         });
-        jPanel2.add(jtfPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, 125, -1));
+        jPanel2.add(jtfPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 125, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Base");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, -1, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, -1, -1));
 
         jtfBase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfBaseKeyPressed(evt);
             }
         });
-        jPanel2.add(jtfBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 378, 125, -1));
+        jPanel2.add(jtfBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 390, 125, -1));
 
         jcbBase.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -349,7 +352,7 @@ public class sistema extends javax.swing.JFrame {
                 jcbBaseActionPerformed(evt);
             }
         });
-        jPanel2.add(jcbBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 350, -1, -1));
+        jPanel2.add(jcbBase, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Codigo");
@@ -414,6 +417,10 @@ public class sistema extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Productos");
         jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel21.setText("Precio");
+        jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         jtp.addTab("tab1", jPanel2);
 
@@ -509,6 +516,11 @@ public class sistema extends javax.swing.JFrame {
                 jcbProductosItemStateChanged(evt);
             }
         });
+        jcbProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbProductosActionPerformed(evt);
+            }
+        });
         jPanel4.add(jcbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, -1));
 
         jtp.addTab("tab3", jPanel4);
@@ -519,58 +531,99 @@ public class sistema extends javax.swing.JFrame {
         jLabel19.setText("Compras");
         jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jcbComprasP.setEditable(true);
-        jPanel5.add(jcbComprasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 260, -1));
-
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel14.setText("Precio");
-        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, -1, -1));
+        jLabel14.setText("Total:");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 510, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel16.setText("Producto");
+        jLabel16.setText("Codigo");
         jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setText("Cantidad");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
-        jPanel5.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 260, -1));
-        jPanel5.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 260, -1));
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        jPanel5.add(jtfPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 260, -1));
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        jtfCantidadC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfCantidadCKeyPressed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 260, -1));
+        jPanel5.add(jtfCantidadC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 260, -1));
 
-        jButton3.setText("Eliminar");
-        jPanel5.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 250, -1));
+        btnAgregarC.setText("Agregar");
+        btnAgregarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarCActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnAgregarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 260, -1));
+
+        jtfEliminarC.setText("Eliminar");
+        jtfEliminarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfEliminarCActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jtfEliminarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 250, -1));
 
         jtCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Codigo", "Nombre", "Cantidad", "Precio"
+                "Codigo", "Nombre", "Cantidad", "Precio", "Total"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane3.setViewportView(jtCompra);
 
-        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 530, 500));
+        jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 530, 440));
+
+        bntRegC.setText("Registrar Compra");
+        bntRegC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bntRegCActionPerformed(evt);
+            }
+        });
+        jPanel5.add(bntRegC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 260, -1));
+
+        jLabel22.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel22.setText("Nombre");
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        jPanel5.add(jtfNombreC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 260, -1));
+
+        jtfCodigoC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfCodigoCKeyPressed(evt);
+            }
+        });
+        jPanel5.add(jtfCodigoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 260, -1));
+
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel23.setText("Precio");
+        jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+
+        jtfTotalC.setEditable(false);
+        jPanel5.add(jtfTotalC, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, 160, -1));
 
         jtp.addTab("tab4", jPanel5);
+
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jtp.addTab("tab5", jPanel6);
         jtp.addTab("tab6", jPanel7);
 
@@ -602,6 +655,7 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         jtp.setSelectedIndex(3);
+        LimpiarCompra();
     }//GEN-LAST:event_btnComprasActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -1059,10 +1113,99 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbProductosItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAgregarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCActionPerformed
         // TODO add your handling code here:
         //AGREGAR DATOS DEL PRODUCTO COMPRADO A LA TABLA Y DESPUES REGISTRAR VENTA 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if(!jtfCantidadC.getText().equals("")){
+                String cod = jtfCodigoC.getText();
+                String nombre = jtfNombreC.getText();
+                float cant = Float.parseFloat(jtfCantidadC.getText());
+                float precio = Float.parseFloat(jtfPrecioC.getText());
+                float total = precio * cant;
+                item = item +1;
+                tmp = (DefaultTableModel) jtCompra.getModel();
+                for (int i = 0; i < jtCompra.getRowCount(); i++) {
+                    if (jtCompra.getValueAt(i, 0).equals(jtfNombreC.getText())) {
+                        JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
+                        LimpiarCompra();
+                        jtfCodigoC.requestFocus();
+                        return;
+                    }
+            }
+                ArrayList lista = new ArrayList();
+                lista.add(item);
+                lista.add(cod);
+                lista.add(nombre);
+                lista.add(cant);
+                lista.add(precio);
+                lista.add(total);
+                Object[] o = new Object[5];
+                o[0]= lista.get(1);
+                 o[1]= lista.get(2);
+                 o[2]= lista.get(3);
+                 o[3]= lista.get(4);
+                 o[4]= lista.get(5);
+                 tmp.addRow(o);
+                 jtCompra.setModel(tmp);
+                 Total();
+                 LimpiarCompra();
+                 jtfCodigoC.requestFocus();
+            }
+            else{
+            JOptionPane.showMessageDialog(null, "Ingresa la cantidad");
+            }
+    }//GEN-LAST:event_btnAgregarCActionPerformed
+
+    private void jtfCantidadCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCantidadCKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAgregarC.doClick();
+        }
+    }//GEN-LAST:event_jtfCantidadCKeyPressed
+
+    private void jcbProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbProductosActionPerformed
+
+    private void jtfCodigoCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoCKeyPressed
+        // TODO add your handling code her
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if(!"".equals(jtfCodigoC.getText())){
+            int cod = Integer.parseInt(jtfCodigoC.getText().toString());
+        pro = pdb.BuscarPro(cod);
+            if (pro.getName() != null) {
+                jtfNombreC.setText(""+pro.getName());
+                jtfPrecioC.setText(""+pro.getPrecio());
+                jtfCantidadC.requestFocus();
+            }
+            else{
+           LimpiarCompra();
+           jtfCodigoC.requestFocus();
+            }
+        }else{
+        JOptionPane.showMessageDialog(null, "Ingrese el codigo de producto");
+        jtfCodigoC.requestFocus();
+        }
+        
+        }
+    }//GEN-LAST:event_jtfCodigoCKeyPressed
+
+    private void jtfEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEliminarCActionPerformed
+        // TODO add your handling code here:
+        modelo = (DefaultTableModel) jtCompra.getModel();
+        modelo.removeRow(jtCompra.getSelectedRow());
+        Total();
+        jtfCodigoC.requestFocus();
+    }//GEN-LAST:event_jtfEliminarCActionPerformed
+
+    private void bntRegCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegCActionPerformed
+        // TODO add your handling code here:
+        RegistrarCompra();
+        RegistrarDetalleC();
+        ActualizarStock();
+        LimpiarCompra();
+        LimpiarTableC();
+    }//GEN-LAST:event_bntRegCActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1098,7 +1241,7 @@ public class sistema extends javax.swing.JFrame {
             }
         });
     }
-    public static String rol(){
+    private static String rol(){
         String rol;
     if(database.rol==2){
         rol="Administrador";
@@ -1108,7 +1251,7 @@ public class sistema extends javax.swing.JFrame {
         }
     return rol;
     }
-    public boolean Numeros(String base){
+    private boolean Numeros(String base){
     float num;
     try {
     num = Float.parseFloat(base);
@@ -1117,7 +1260,7 @@ public class sistema extends javax.swing.JFrame {
     return false;
     }    
     }
-    public void ListarProductos() throws SQLException{
+    private void ListarProductos() throws SQLException{
     ArrayList<Productos> ListaP = pdb.ListarProductos();
     modelo = (DefaultTableModel) jtableP.getModel();
     Object[] ob = new Object[7];
@@ -1133,7 +1276,7 @@ public class sistema extends javax.swing.JFrame {
         }
         jtableP.setModel(modelo);
     }
-    public void ListarDerivados() throws SQLException{
+    private void ListarDerivados() throws SQLException{
     ArrayList<Derivados> ListaD = ddb.ListarProductosD();
     modelo = (DefaultTableModel) jtableD.getModel();
     Object[] ob = new Object[6];
@@ -1148,14 +1291,20 @@ public class sistema extends javax.swing.JFrame {
         }
         jtableD.setModel(modelo);
     }
-    public void LimpiarTable(){
+    private void LimpiarTable(){
         for (int i = 0; i < modelo.getRowCount(); i++) {
             modelo.removeRow(i);
             i=i-1;
         }
     }
-    public void LimpiarProductos(){
-    jtfCodigo.setText(null);
+    private void LimpiarTableC(){
+    for (int i = 0; i < tmp.getRowCount(); i++) {
+            tmp.removeRow(i);
+            i=i-1;
+        }
+    }
+    private void LimpiarProductos(){
+    jtfCodigo.setText("");
     jtfNombre.setText(null);
     jtfDetalle.setText(null);
     jcbUnidad.setSelectedItem(null);
@@ -1165,24 +1314,64 @@ public class sistema extends javax.swing.JFrame {
     jcbBase.setSelected(false);
     
     }
-    public void LimpiarDerivados(){
+    private void LimpiarDerivados(){
     jcbProductos.setSelectedIndex(0);
     jtfCodigoD.setText("");
     jtfNombreD.setText("");
     jtfDetalleD.setText("");
     jtfPrecioD.setText("");
     }
-    public void RegistrarVenta(){
-     Float total=0f;
-        for (int i = 0; i < jtCompra.getRowCount(); i++) {
-            total= total+Float.parseFloat(""+jtCompra.getValueAt(i, 3));
-        }
-        c.setTotal(total);
+    private void RegistrarCompra(){
+        
+     String vendedor = jlbUsuario.getText();
+     Float totalC = Float.parseFloat(jtfTotalC.getText());
+        c.setTotal(totalC);
+        c.setVendedor(vendedor);
         cdb.registrarCompra(c);
     }
+    private void Total(){
+        totalpagar=0;
+        int numFila = jtCompra.getRowCount();
+        for (int i = 0; i < numFila; i++) {
+            float cal = Float.parseFloat(""+jtCompra.getModel().getValueAt(i, 4));
+            totalpagar = totalpagar+cal;
+        }
+        jtfTotalC.setText(""+String.format("%.2f",totalpagar));
+    }
+    private void LimpiarCompra(){
+    jtfNombreC.setText("");
+    jtfCodigoC.setText("");
+    jtfCantidadC.setText("");
+    jtfPrecioC.setText("");
+    jtfTotalC.setText("");
+    }
+    private void RegistrarDetalleC(){
+        int id = cdb.idVenta();
+        for (int i = 0; i < jtCompra.getRowCount(); i++) {
+            int cod = Integer.parseInt(jtCompra.getValueAt(i, 0).toString());
+            Float cant = Float.parseFloat(jtCompra.getValueAt(i, 2).toString());
+            Float pre = Float.parseFloat(jtCompra.getValueAt(i, 3).toString());
+            cd.setCdproducto(cod);
+            cd.setCantidad(cant);
+            cd.setPrecio(pre);
+            cd.setCdcompra(id);
+            cdb.registarDetalleC(cd);
+        }
+    }
+    private void ActualizarStock(){
+        for (int i = 0; i < jtCompra.getRowCount(); i++) {
+            int cod  = Integer.parseInt(jtCompra.getValueAt(i, 0).toString());
+            float cant = Float.parseFloat(jtCompra.getValueAt(i, 2).toString());
+            pro = pdb.BuscarPro(cod);
+            float actual = pro.getStock()+cant;
+            cdb.actualizar(cant, cod);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bntRegC;
     private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarC;
     private javax.swing.JButton btnAgregarD;
     private javax.swing.JButton btnCombos;
     private javax.swing.JButton btnCompras;
@@ -1193,9 +1382,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnVentas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1209,11 +1396,13 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
@@ -1232,11 +1421,8 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JCheckBox jcbBase;
-    private javax.swing.JComboBox<String> jcbComprasP;
     private javax.swing.JComboBox<String> jcbProductos;
     private javax.swing.JComboBox<String> jcbUnidad;
     private javax.swing.JLabel jlbFecha;
@@ -1247,14 +1433,20 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JTable jtableD;
     private javax.swing.JTable jtableP;
     private javax.swing.JTextField jtfBase;
+    private javax.swing.JTextField jtfCantidadC;
     private javax.swing.JTextField jtfCodigo;
+    private javax.swing.JTextField jtfCodigoC;
     private javax.swing.JTextField jtfCodigoD;
     private javax.swing.JTextField jtfDetalle;
     private javax.swing.JTextField jtfDetalleD;
+    private javax.swing.JButton jtfEliminarC;
     private javax.swing.JTextField jtfNombre;
+    private javax.swing.JTextField jtfNombreC;
     private javax.swing.JTextField jtfNombreD;
     private javax.swing.JTextField jtfPrecio;
+    private javax.swing.JTextField jtfPrecioC;
     private javax.swing.JTextField jtfPrecioD;
+    private javax.swing.JTextField jtfTotalC;
     private javax.swing.JTabbedPane jtp;
     private javax.swing.JLabel label;
     // End of variables declaration//GEN-END:variables

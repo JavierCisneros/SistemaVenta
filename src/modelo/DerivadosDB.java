@@ -123,6 +123,14 @@ public class DerivadosDB {
     catch(SQLException e){
         System.out.println(""+e.getMessage());
     }
+        finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }    
+    }
     return ListaP;
     }
     

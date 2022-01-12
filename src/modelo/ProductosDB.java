@@ -128,7 +128,7 @@ public class ProductosDB {
     return ListaP;
     }
     public void ConsulatarProducto(JComboBox productos){
-  String SQL = "SELECT cdproducto, name FROM productos ";
+  String SQL = "SELECT name FROM productos WHERE udm = 1";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -153,8 +153,8 @@ public class ProductosDB {
     }
     }
     }
-     public void ConsulatarCodigos(ArrayList<Integer> codigos){
-  String SQL = "SELECT cdproducto, name FROM productos ";
+    public void ConsulatarCodigos(ArrayList<Integer> codigos){
+  String SQL = "SELECT cdproducto FROM productos WHERE udm = 1";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -178,5 +178,35 @@ public class ProductosDB {
         System.out.println(""+e.toString());
     }
     }
+    }
+    public Productos BuscarPro(int pro){
+    Productos producto = new Productos();
+    String SQL = "SELECT * FROM productos WHERE cdproducto = ?";
+            try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setInt(1, pro);
+        rs = pst.executeQuery();
+                if (rs.next()) {
+                    producto.setName(rs.getString("name"));
+                    producto.setDetalle(rs.getString("detalle"));
+                    producto.setUdm(rs.getInt("udm"));
+                    producto.setPrecio(rs.getFloat("precio"));
+                    producto.setBase(rs.getFloat("base"));
+                    producto.setStock(rs.getFloat("stock"));
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex.toString());
+            }    finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }    
+    }
+            
+            return producto;
     }
 }

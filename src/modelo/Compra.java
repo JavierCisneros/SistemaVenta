@@ -11,12 +11,13 @@ package modelo;
  */
 public class Compra {
     private float total;
-
+    private String Vendedor;
     public Compra() {
     }
 
-    public Compra(float total) {
+    public Compra(float total, String Vendedor) {
         this.total = total;
+        this.Vendedor = Vendedor;
     }
 
     public float getTotal() {
@@ -26,5 +27,14 @@ public class Compra {
     public void setTotal(float total) {
         this.total = total;
     }
-    
+
+    public String getVendedor() {
+        return Vendedor;
+    }
+
+    public void setVendedor(String Vendedor) {
+        this.Vendedor = Vendedor;
+    }
+
+
 }
