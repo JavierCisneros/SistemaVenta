@@ -13,16 +13,18 @@ public class DetalleCompra {
     private int cdproducto;
     private float cantidad;
     private float precio;
+    private float subtotal;
     private int cdcompra;
 
     public DetalleCompra() {
     }
 
-    public DetalleCompra(int cdproducto, float cantidad, float precio, int cdcompra) {
+    public DetalleCompra(int cdproducto, float cantidad, float precio,float subtotal, int cdcompra) {
         this.cdproducto = cdproducto;
         this.cantidad = cantidad;
         this.precio = precio;
         this.cdcompra = cdcompra;
+        this.subtotal = subtotal;
     }
 
     public int getCdproducto() {
@@ -55,6 +57,14 @@ public class DetalleCompra {
 
     public void setCdcompra(int cdcompra) {
         this.cdcompra = cdcompra;
+    }
+
+    public float getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(float subtotal) {
+        this.subtotal = subtotal;
     }
     
 }

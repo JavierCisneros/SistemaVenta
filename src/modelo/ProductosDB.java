@@ -23,7 +23,7 @@ public class ProductosDB {
     PreparedStatement pst;
     ResultSet rs;
     public boolean agregarP(Productos pro){
-    String SQL = "INSERT INTO `productos`(`cdproducto`, `name`, `detalle`, `udm`, `precio`, `base`) VALUES (?,?,?,?,?,?)";
+    String SQL = "INSERT INTO `productos`(`cdproducto`, `name`, `detalle`, `udm`, `precio`, `base`, `stock`, `piezas`) VALUES (?,?,?,?,?,?,?,?)";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -34,6 +34,8 @@ public class ProductosDB {
         pst.setInt(4, pro.getUdm());
         pst.setFloat(5, pro.getPrecio());
         pst.setFloat(6, pro.getBase());
+        pst.setFloat(7, pro.getStock());
+        pst.setInt(8, pro.getPiezas());
         pst.executeUpdate();
         return true;
     }
@@ -74,7 +76,7 @@ public class ProductosDB {
     }
     }
     public boolean editarP(Productos pro){
-    String SQL = "UPDATE `productos` SET `cdproducto`= ?,`name`= ?,`detalle`= ?,`udm`= ?,`precio`= ?,`base`= ? WHERE `cdproducto`= ?";
+    String SQL = "UPDATE `productos` SET `cdproducto`= ?,`name`= ?,`detalle`= ?,`udm`= ?,`precio`= ?,`base`= ?,`stock`= ?,`piezas`= ? WHERE `cdproducto`= ?";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -85,7 +87,9 @@ public class ProductosDB {
         pst.setInt(4, pro.getUdm());
         pst.setFloat(5, pro.getPrecio());
         pst.setFloat(6, pro.getBase());
-        pst.setInt(7, pro.getCd() );
+        pst.setFloat(7, pro.getStock());
+        pst.setInt(8, pro.getPiezas());
+        pst.setInt(9, pro.getCd() );
         pst.executeUpdate();
         return true;
     }
@@ -119,6 +123,7 @@ public class ProductosDB {
         pd.setPrecio(rs.getFloat("precio"));
         pd.setBase(rs.getFloat("base"));
         pd.setStock(rs.getFloat("stock"));
+        pd.setPiezas(rs.getInt("piezas"));
         ListaP.add(pd);
         }
     }
@@ -127,7 +132,7 @@ public class ProductosDB {
     }
     return ListaP;
     }
-    public void ConsulatarProducto(JComboBox productos){
+    public void ConsultarProductoG(JComboBox productos){
   String SQL = "SELECT name FROM productos WHERE udm = 1";
     try{
         conexion = new Conexion();
@@ -153,7 +158,33 @@ public class ProductosDB {
     }
     }
     }
-    public void ConsulatarCodigos(ArrayList<Integer> codigos){
+    public void ConsultarProductoU(JComboBox productos){
+  String SQL = "SELECT name FROM productos WHERE udm = 2";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        rs = pst.executeQuery();
+        productos.addItem("");
+        while(rs.next()){
+            productos.addItem(rs.getString("name"));
+        }
+
+    }
+    catch(SQLException e){
+    
+        System.out.println(""+ e.toString());
+    }
+    finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }
+    }
+    }
+    public void ConsultarCodigosG(ArrayList<Integer> codigos){
   String SQL = "SELECT cdproducto FROM productos WHERE udm = 1";
     try{
         conexion = new Conexion();
@@ -179,7 +210,63 @@ public class ProductosDB {
     }
     }
     }
+    public void ConsultarCodigosU(ArrayList<Integer> codigos){
+  String SQL = "SELECT cdproducto FROM productos WHERE udm = 2";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        rs = pst.executeQuery();
+        codigos.add(0);
+        while(rs.next()){
+            codigos.add(rs.getInt("cdproducto"));
+        }
+
+    }
+    catch(SQLException e){
+    
+        System.out.println(""+ e.toString());
+    }
+    finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }
+    }
+    }
     public Productos BuscarPro(int pro){
+    Productos producto = new Productos();
+    String SQL = "SELECT * FROM productos WHERE cdproducto = ?";
+            try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setInt(1, pro);
+        rs = pst.executeQuery();
+                if (rs.next()) {
+                    producto.setName(rs.getString("name"));
+                    producto.setDetalle(rs.getString("detalle"));
+                    producto.setUdm(rs.getInt("udm"));
+                    producto.setPrecio(rs.getFloat("precio"));
+                    producto.setBase(rs.getFloat("base"));
+                    producto.setStock(rs.getFloat("stock"));
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex.toString());
+            }    finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }    
+    }
+            
+            return producto;
+    }
+    public Productos BuscarProVenta(int pro){
     Productos producto = new Productos();
     String SQL = "SELECT * FROM productos WHERE cdproducto = ?";
             try{

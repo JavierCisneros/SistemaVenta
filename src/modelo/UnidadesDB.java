@@ -15,23 +15,24 @@ import java.util.ArrayList;
  *
  * @author yopri
  */
-public class DerivadosDB {
+public class UnidadesDB {
     Conexion conexion;
     Connection con;
     PreparedStatement pst;
     ResultSet rs;
-    public boolean agregarD(Derivados der){
-    String SQL = "INSERT INTO `derivados`(`codigo`, `nombre`, `cderivado`, `nderivado`, `detalle`, `precio`) VALUES (?,?,?,?,?,?)";
+    public boolean agregarU(Unidades un){
+    String SQL = "INSERT INTO `unidades`(`codigo`, `nombre`, `cunidad`, `nunidad`, `detalleu`, `piezasu`, `preciou`) VALUES  (?,?,?,?,?,?,?)";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, der.getCd());
-        pst.setString(2, der.getNombre());
-        pst.setInt(3, der.getCderivado());
-        pst.setString(4, der.getNderivado());
-        pst.setString(5, der.getDetalled());
-        pst.setFloat(6, der.getPrecio());
+        pst.setInt(1, un.getCodigo());
+        pst.setString(2, un.getNombre());
+        pst.setInt(3, un.getCdunidad());
+        pst.setString(4, un.getNunidad());
+        pst.setString(5, un.getDetalleu());
+        pst.setInt(6, un.getPiezas());
+        pst.setFloat(7, un.getPreciou());
         pst.executeUpdate();
         return true;
     }
@@ -48,8 +49,8 @@ public class DerivadosDB {
     }
     }
     }
-    public boolean eliminarD(int id){
-    String SQL = "DELETE FROM derivados WHERE cderivado = ?";
+    public boolean eliminarU(int id){
+    String SQL = "DELETE FROM unidades WHERE cunidad = ?";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -72,19 +73,20 @@ public class DerivadosDB {
     }
     }
     }
-    public boolean editarD(Derivados der){
-    String SQL = "UPDATE `derivados` SET `codigo`= ?,`nombre`=?,`cderivado`= ?,`nderivado`= ?,`detalle`= ?,`precio`= ? WHERE `cderivado`= ?";
+    public boolean editarU(Unidades un){
+    String SQL = "UPDATE `unidades` SET `codigo`=?,`nombre`=?,`cunidad`=?,`nunidad`= ?,`detalleu`=?,`piezasu`= ?,`preciou`= ? WHERE `cunidad` = ?";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, der.getCd());
-        pst.setString(2, der.getNombre());
-        pst.setInt(3, der.getCderivado());
-        pst.setString(4, der.getNderivado());
-        pst.setString(5, der.getDetalled());
-        pst.setFloat(6, der.getPrecio());
-        pst.setInt(7, der.getCderivado());
+        pst.setInt(1, un.getCodigo());
+        pst.setString(2, un.getNombre());
+        pst.setInt(3, un.getCdunidad());
+        pst.setString(4, un.getNunidad());
+        pst.setString(5, un.getDetalleu());
+        pst.setInt(6, un.getPiezas());
+        pst.setFloat(7, un.getPreciou());
+        pst.setInt(8, un.getCdunidad());
         pst.executeUpdate();
         return true;
     }
@@ -101,9 +103,9 @@ public class DerivadosDB {
     }
     }
     }
-    public ArrayList ListarProductosD() throws SQLException{
-    ArrayList<Derivados> ListaP = new ArrayList();
-    String SQL = "SELECT * FROM derivados";
+    public ArrayList ListarProductosU() throws SQLException{
+    ArrayList<Unidades> ListaP = new ArrayList();
+    String SQL = "SELECT * FROM unidades";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -111,13 +113,15 @@ public class DerivadosDB {
         rs = pst.executeQuery();
         while(rs.next()){
         Derivados der = new Derivados();
-        der.setCd(rs.getInt("codigo"));
-        der.setNombre(rs.getString("nombre"));
-        der.setCderivado(rs.getInt("cderivado"));
-        der.setNderivado(rs.getString("nderivado"));
-        der.setDetalled(rs.getString("detalle"));
-        der.setPrecio(rs.getFloat("precio"));
-        ListaP.add(der);
+        Unidades uni = new Unidades();
+        uni.setCodigo(rs.getInt("codigo"));
+        uni.setNombre(rs.getString("nombre"));
+        uni.setCdunidad(rs.getInt("cunidad"));
+        uni.setNunidad(rs.getString("nunidad"));
+        uni.setDetalleu(rs.getString("detalleu"));
+        uni.setPiezas(rs.getInt("piezasu"));
+        uni.setPreciou(rs.getFloat("preciou"));
+        ListaP.add(uni);
         }
     }
     catch(SQLException e){

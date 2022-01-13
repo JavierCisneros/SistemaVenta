@@ -42,7 +42,7 @@ public class CompraDB {
         return r;
     }
     public int registarDetalleC(DetalleCompra dc){
-    String SQL = "INSERT INTO detallecompra (`cdproducto`, `cantidad`, `precio`, `cdcompra`) VALUES (?,?,?,?) ";
+    String SQL = "INSERT INTO detallecompra (`cdproducto`, `cantidad`, `precio`, `subtotal`, `cdcompra`) VALUES (?,?,?,?,?) ";
         try {
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -50,10 +50,11 @@ public class CompraDB {
         pst.setInt(1, dc.getCdproducto());
         pst.setFloat(2, dc.getCantidad());
         pst.setFloat(3, dc.getPrecio());
-        pst.setInt(4,dc.getCdcompra());
+        pst.setFloat(4, dc.getSubtotal());
+        pst.setInt(5, dc.getCdcompra());
         pst.execute();
         } catch (SQLException ex) {
-            System.out.println(""+ex.toString());
+            System.out.println("error detalle:"+ex.toString());
         }
         finally{
     try{
@@ -92,6 +93,9 @@ public class CompraDB {
     }
     public boolean actualizar(float cantidad, int cod){
         String SQL = "UPDATE productos SET stock = ? WHERE cdproducto = ?";
+        //IF NEW.piezas == 0 THEN
+//SET NEW.piezas = @derivados.piezas WHERE derivados.codigo = cdproducto
+//END IF
         try {
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -106,4 +110,5 @@ public class CompraDB {
         }
     
     }
+    
 }
