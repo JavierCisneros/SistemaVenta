@@ -26,10 +26,13 @@ import modelo.CompraDB;
 import modelo.Derivados;
 import modelo.DerivadosDB;
 import modelo.DetalleCompra;
+import modelo.DetalleVenta;
 import modelo.Productos;
 import modelo.ProductosDB;
 import modelo.Unidades;
 import modelo.UnidadesDB;
+import modelo.Venta;
+import modelo.VentaDB;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
@@ -56,9 +59,16 @@ public class sistema extends javax.swing.JFrame {
     Compra c = new Compra();
     CompraDB cdb = new CompraDB();
     DetalleCompra cd = new DetalleCompra();
+    Venta v = new Venta();
+    VentaDB vdb = new VentaDB();
+    DetalleVenta vd = new DetalleVenta();
     int item;
+    int itemv;
     float totalpagar;
+    float totalventa;
     DefaultTableModel tmp;
+    DefaultTableModel tmv;
+    int cdUnidad;
     public sistema() {
         initComponents();
         String rol;
@@ -82,6 +92,9 @@ public class sistema extends javax.swing.JFrame {
         
         jtfStockP.setEnabled(false);
         jtfPiezasP.setEnabled(false);
+        jtfStockP.setText("0");
+        jtfPiezasP.setText("0");
+        
         
     }
 
@@ -122,11 +135,13 @@ public class sistema extends javax.swing.JFrame {
         jtfCantidadPV = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
         jtfPrecioPV = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnAgregarPV = new javax.swing.JButton();
+        btnEliminarPV = new javax.swing.JButton();
+        btnVenderPV = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtVenta = new javax.swing.JTable();
+        jtfTotalPV = new javax.swing.JTextField();
+        jLabel40 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jtfCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -344,32 +359,47 @@ public class sistema extends javax.swing.JFrame {
         jPanel3.add(jtfCantidadPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 260, -1));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel39.setText("Precio");
-        jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+        jLabel39.setText("Total:");
+        jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 520, -1, -1));
         jPanel3.add(jtfPrecioPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 260, -1));
 
-        jButton1.setText("Agregar");
-        jPanel3.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 260, -1));
+        btnAgregarPV.setText("Agregar");
+        btnAgregarPV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarPVActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnAgregarPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 260, -1));
 
-        jButton3.setText("Eliminar");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 260, -1));
+        btnEliminarPV.setText("Eliminar");
+        btnEliminarPV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPVActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnEliminarPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 260, -1));
 
-        jButton4.setText("Vender");
-        jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 260, -1));
+        btnVenderPV.setText("Vender");
+        btnVenderPV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVenderPVActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnVenderPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 500, 260, -1));
 
         jtVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Cantidad", "Precio", "Subtotal", "Total"
+                "Codigo", "Nombre", "Cantidad", "Precio", "Subtotal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -383,6 +413,13 @@ public class sistema extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jtVenta);
 
         jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 590, 460));
+
+        jtfTotalPV.setEditable(false);
+        jPanel3.add(jtfTotalPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 520, 150, -1));
+
+        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel40.setText("Precio");
+        jPanel3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jtp.addTab("0", jPanel3);
 
@@ -1011,8 +1048,8 @@ public class sistema extends javax.swing.JFrame {
 
     private void jtfEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEliminarCActionPerformed
         // TODO add your handling code here:
-        modelo = (DefaultTableModel) jtCompra.getModel();
-        modelo.removeRow(jtCompra.getSelectedRow());
+        tmp = (DefaultTableModel) jtCompra.getModel();
+        tmp.removeRow(jtCompra.getSelectedRow());
         Total();
         jtfCodigoC.requestFocus();
     }//GEN-LAST:event_jtfEliminarCActionPerformed
@@ -1029,7 +1066,7 @@ public class sistema extends javax.swing.JFrame {
             item = item +1;
             tmp = (DefaultTableModel) jtCompra.getModel();
             for (int i = 0; i < jtCompra.getRowCount(); i++) {
-                if (jtCompra.getValueAt(i, 0).equals(jtfNombreC.getText())) {
+                if (jtCompra.getValueAt(i, 0).equals(jtfCodigoC.getText())) {
                     JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
                     LimpiarCompra();
                     jtfCodigoC.requestFocus();
@@ -1574,6 +1611,7 @@ public class sistema extends javax.swing.JFrame {
                 } catch (SQLException ex) {
                     System.out.println(""+ex.toString());
                 }
+                jtfCodigo.requestFocus();
             }
             else{
                 JOptionPane.showMessageDialog(this, "Este producto ya esta registrado");
@@ -1662,30 +1700,112 @@ public class sistema extends javax.swing.JFrame {
 
     private void jtfCodigoPVKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoPVKeyPressed
         // TODO add your handling code here:
+
         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             if(!"".equals(jtfCodigoPV.getText())){
-                int cod = Integer.parseInt(jtfCodigoPV.getText().toString());
+                int cod = Integer.parseInt(jtfCodigoPV.getText());
                 pro = pdb.BuscarPro(cod);
-                if (pro.getName() != null) {
-                    jtfNombreC.setText(""+pro.getName());
-                    jtfPrecioC.setText(""+pro.getPrecio());
-                    jtfCantidadC.requestFocus();
+                der = pdb.BuscarDer(cod);
+                uni = pdb.BuscarUni(cod);
+                if (pro.getName() != null ) {
+                    jtfNombrePV.setText(""+pro.getName());
+                    jtfPrecioPV.setText(""+pro.getPrecio());
+                    jtfCantidadPV.requestFocus();
+                  
+                }
+                else if (der.getNderivado() != null) {
+                    jtfNombrePV.setText(""+der.getNderivado());
+                    jtfPrecioPV.setText(""+der.getPrecio());
+                    jtfCantidadPV.requestFocus();
+                   
+                }
+                else if (uni.getNunidad() != null) {
+                    cdUnidad = uni.getCdunidad();
+                    jtfNombrePV.setText(""+uni.getNunidad());
+                    jtfPrecioPV.setText(""+uni.getPreciou());
+                    jtfCantidadPV.requestFocus();
+
                 }
                 else{
-                    LimpiarCompra();
-                    jtfCodigoC.requestFocus();
-                }
+                    LimpiarVenta();
+                    jtfCodigoPV.requestFocus();
+               }
             }else{
                 JOptionPane.showMessageDialog(null, "Ingrese el codigo de producto");
-                jtfCodigoC.requestFocus();
+                jtfCodigoPV.requestFocus();
             }
-
+            
         }
+        if(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+            LimpiarVenta();
+            }
     }//GEN-LAST:event_jtfCodigoPVKeyPressed
 
     private void jtfCantidadPVKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCantidadPVKeyPressed
         // TODO add your handling code here:
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAgregarPV.doClick();
+        }
     }//GEN-LAST:event_jtfCantidadPVKeyPressed
+
+    private void btnAgregarPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPVActionPerformed
+        // TODO add your handling code here:
+         if(!jtfCantidadPV.getText().equals("")){
+            String cod = jtfCodigoPV.getText();
+            String nombre = jtfNombrePV.getText();
+            float cant = Float.parseFloat(jtfCantidadPV.getText());
+            float precio = Float.parseFloat(jtfPrecioPV.getText());
+            float total = precio * cant;
+            itemv = itemv +1;
+            tmv = (DefaultTableModel) jtVenta.getModel();
+            for (int i = 0; i < jtVenta.getRowCount(); i++) {
+                if (jtVenta.getValueAt(i, 0).equals(jtfCodigoPV.getText())) {
+                    JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
+                    LimpiarVenta();
+                    jtfCodigoPV.requestFocus();
+                    return;
+                }
+            }
+            ArrayList lista = new ArrayList();
+            lista.add(itemv);
+            lista.add(cod);
+            lista.add(nombre);
+            lista.add(cant);
+            lista.add(precio);
+            lista.add(total);
+            Object[] o = new Object[5];
+            o[0]= lista.get(1);
+            o[1]= lista.get(2);
+            o[2]= lista.get(3);
+            o[3]= lista.get(4);
+            o[4]= lista.get(5);
+            tmv.addRow(o);
+            jtVenta.setModel(tmv);
+            LimpiarVenta();
+            TotalV();
+            jtfCodigoPV.requestFocus();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Ingresa la cantidad");
+        }
+    }//GEN-LAST:event_btnAgregarPVActionPerformed
+
+    private void btnEliminarPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPVActionPerformed
+        // TODO add your handling code here:
+         tmv = (DefaultTableModel) jtVenta.getModel();
+        tmv.removeRow(jtVenta.getSelectedRow());
+        TotalV();
+        jtfCodigoPV.requestFocus();
+    }//GEN-LAST:event_btnEliminarPVActionPerformed
+
+    private void btnVenderPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderPVActionPerformed
+        // TODO add your handling code here:
+        RegistrarVenta();
+        RegistrarDetalleV();
+        ActualizarStockV();
+        LimpiarVenta();
+        LimpiarTableV();
+    }//GEN-LAST:event_btnVenderPVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1800,6 +1920,12 @@ public class sistema extends javax.swing.JFrame {
             i=i-1;
         }
     }
+    private void LimpiarTableV(){
+    for (int i = 0; i < tmv.getRowCount(); i++) {
+            tmv.removeRow(i);
+            i=i-1;
+        }
+    }
     private void LimpiarProductos(){
     jtfCodigo.setText("");
     jtfNombre.setText(null);
@@ -1809,8 +1935,8 @@ public class sistema extends javax.swing.JFrame {
     jtfBase.setText("1");
     jtfBase.setEnabled(false);
     jcbBase.setSelected(false);
-    jtfStockP.setText("");
-    jtfPiezasP.setText("");
+    jtfStockP.setText("0");
+    jtfPiezasP.setText("0");
     }
     private void LimpiarDerivados(){
     jcbProductos.setSelectedIndex(0);
@@ -1835,6 +1961,14 @@ public class sistema extends javax.swing.JFrame {
         c.setVendedor(vendedor);
         cdb.registrarCompra(c);
     }
+    private void RegistrarVenta(){
+        
+     String vendedor = jlbUsuario.getText();
+     Float totalC = Float.parseFloat(jtfTotalPV.getText());
+        v.setTotal(totalC);
+        v.setVendedor(vendedor);
+        vdb.registrarCompra(v);
+    }
     private void Total(){
         totalpagar=0;
         int numFila = jtCompra.getRowCount();
@@ -1843,6 +1977,15 @@ public class sistema extends javax.swing.JFrame {
             totalpagar = totalpagar+cal;
         }
         jtfTotalC.setText(""+String.format("%.2f",totalpagar));
+    }
+    private void TotalV(){
+        totalventa=0;
+        int numFila = jtVenta.getRowCount();
+        for (int i = 0; i < numFila; i++) {
+            float cal = Float.parseFloat(""+jtVenta.getModel().getValueAt(i, 4));
+            totalventa = totalventa+cal;
+        }
+        jtfTotalPV.setText(""+String.format("%.2f",totalventa));
     }
     private void LimpiarCompra(){
     jtfNombreC.setText("");
@@ -1866,13 +2009,70 @@ public class sistema extends javax.swing.JFrame {
             cdb.registarDetalleC(cd);
         }
     }
+    private void RegistrarDetalleV(){
+        int id = vdb.idVenta();
+        for (int i = 0; i < jtVenta.getRowCount(); i++) {
+            int cod = Integer.parseInt(jtVenta.getValueAt(i, 0).toString());
+            Float cant = Float.parseFloat(jtVenta.getValueAt(i, 2).toString());
+            Float pre = Float.parseFloat(jtVenta.getValueAt(i, 3).toString());
+            Float sub = pre * cant;
+            vd.setCdproducto(cod);
+            vd.setCantidad(cant);
+            vd.setPrecio(pre);
+            vd.setSubtotal(sub);
+            vd.setCdventa(id);
+            vdb.registarDetalleV(vd);
+        }
+    }
     private void ActualizarStock(){
         for (int i = 0; i < jtCompra.getRowCount(); i++) {
             int cod  = Integer.parseInt(jtCompra.getValueAt(i, 0).toString());
             float cant = Float.parseFloat(jtCompra.getValueAt(i, 2).toString());
             pro = pdb.BuscarPro(cod);
             float actual = pro.getStock()+cant;
-            cdb.actualizar(cant, cod);
+            cdb.actualizar(actual, cod);
+        }
+    }
+      private void ActualizarStockV(){
+        for (int i = 0; i < jtVenta.getRowCount(); i++) {
+            int cdder;
+            int cduni;
+            int cdpro;
+            int cod  = Integer.parseInt(jtVenta.getValueAt(i, 0).toString());
+            float cant = Float.parseFloat(jtVenta.getValueAt(i, 2).toString());
+            pro = pdb.BuscarPro(cod);
+            der = pdb.BuscarDer(cod);
+            uni = pdb.BuscarUni(cod);
+            cdder = der.getCd();
+            cduni = uni.getCodigo();
+            cdpro = pro.getCd();
+            if(cdpro!=0){
+            float actual = pro.getStock()-cant;
+            vdb.actualizar(actual, cdpro);
+            }
+            else if(cdder!=0){
+            pro = pdb.BuscarPro(cdder);
+            float actual = pro.getStock()-cant;
+            vdb.actualizar(actual, cdder);
+            }
+            else if(cduni!=0){
+            pro = pdb.BuscarPro(cduni);
+            int c = Integer.parseInt(""+Math.round(cant));
+            int actual = Integer.parseInt(""+(pro.getPiezas()-c));
+            //vdb.actualizar(actual, cduni); //Actualizar piezas
+            vdb.actualizarPiezas(actual, cduni);
+            //Actualizacion de piezas y stock para unidades
+            int exi = pro.getPiezas();
+            int piezas = uni.getPiezas();
+            float stock = pro.getStock();
+            if(exi<0){
+            int suma = piezas+exi;
+            float resta = stock - 1;
+            vdb.actualizarStock(resta, suma, cduni);
+            }
+            
+            }
+            
         }
     }
     private void cajas(){
@@ -1887,12 +2087,20 @@ public class sistema extends javax.swing.JFrame {
         AutoCompleteDecorator.decorate(jcbProductos );
         AutoCompleteDecorator.decorate(jcbProductosU );
     }
+    private void LimpiarVenta(){
+    jtfNombrePV.setText("");
+    jtfCodigoPV.setText("");
+    jtfCantidadPV.setText("");
+    jtfPrecioPV.setText("");
+    jtfTotalPV.setText("");
+        }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntRegC;
     private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarC;
     private javax.swing.JButton btnAgregarD;
+    private javax.swing.JButton btnAgregarPV;
     private javax.swing.JButton btnAgregarU;
     private javax.swing.JButton btnCombos;
     private javax.swing.JButton btnCompras;
@@ -1901,16 +2109,15 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarU;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarD;
+    private javax.swing.JButton btnEliminarPV;
     private javax.swing.JButton btnEliminarU;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnUnidades;
+    private javax.swing.JButton btnVenderPV;
     private javax.swing.JButton btnVentas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1945,6 +2152,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -2006,6 +2214,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JTextField jtfPrecioU;
     private javax.swing.JTextField jtfStockP;
     private javax.swing.JTextField jtfTotalC;
+    private javax.swing.JTextField jtfTotalPV;
     private javax.swing.JTabbedPane jtp;
     // End of variables declaration//GEN-END:variables
 }

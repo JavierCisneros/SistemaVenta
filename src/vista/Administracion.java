@@ -36,7 +36,7 @@ public class Administracion extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnMenu = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -61,13 +61,13 @@ public class Administracion extends javax.swing.JFrame {
         });
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 333, -1, -1));
 
-        jButton2.setText("Menu");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 333, -1, -1));
+        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(315, 333, -1, -1));
 
         jLabel2.setText("Nombre:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 79, -1, -1));
@@ -99,12 +99,12 @@ public class Administracion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
         vista.sistema ventana = new vista.sistema();
         ventana.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +143,7 @@ public class Administracion extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnMenu;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -5,7 +5,7 @@
  */
 package modelo;
 
-import java.awt.List;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -246,29 +246,31 @@ public class ProductosDB {
         pst.setInt(1, pro);
         rs = pst.executeQuery();
                 if (rs.next()) {
+                    producto.setCd(rs.getInt("cdproducto"));
                     producto.setName(rs.getString("name"));
                     producto.setDetalle(rs.getString("detalle"));
                     producto.setUdm(rs.getInt("udm"));
                     producto.setPrecio(rs.getFloat("precio"));
                     producto.setBase(rs.getFloat("base"));
                     producto.setStock(rs.getFloat("stock"));
+                    producto.setPiezas(rs.getInt("piezas"));
                 }
             }catch(SQLException ex){
-                System.out.println(""+ex.toString());
+                System.out.println("no esta"+ex.toString());
             }    finally{
     try{
         con.close();
     }
     catch(SQLException e){
-        System.out.println(""+e.toString());
+        System.out.println("no esta 2"+e.toString());
     }    
     }
             
             return producto;
     }
-    public Productos BuscarProVenta(int pro){
-    Productos producto = new Productos();
-    String SQL = "SELECT * FROM productos WHERE cdproducto = ?";
+    public Unidades BuscarUni(int pro){
+    Unidades unidad = new Unidades();
+    String SQL = "SELECT * FROM unidades WHERE cunidad = ?";
             try{
         conexion = new Conexion();
         con = conexion.getConnection();
@@ -276,12 +278,13 @@ public class ProductosDB {
         pst.setInt(1, pro);
         rs = pst.executeQuery();
                 if (rs.next()) {
-                    producto.setName(rs.getString("name"));
-                    producto.setDetalle(rs.getString("detalle"));
-                    producto.setUdm(rs.getInt("udm"));
-                    producto.setPrecio(rs.getFloat("precio"));
-                    producto.setBase(rs.getFloat("base"));
-                    producto.setStock(rs.getFloat("stock"));
+                    unidad.setCodigo(rs.getInt("codigo"));
+                    unidad.setNombre(rs.getString("nombre"));
+                    unidad.setCdunidad(rs.getInt("cunidad"));
+                    unidad.setNunidad(rs.getString("nunidad"));
+                    unidad.setDetalleu(rs.getString("detalleu"));
+                    unidad.setPiezas(rs.getInt("piezasu"));
+                    unidad.setPreciou(rs.getFloat("preciou"));
                 }
             }catch(SQLException ex){
                 System.out.println(""+ex.toString());
@@ -294,6 +297,37 @@ public class ProductosDB {
     }    
     }
             
-            return producto;
+            return unidad;
     }
+    public Derivados BuscarDer(int pro){
+    Derivados derivado = new Derivados();
+    String SQL = "SELECT * FROM derivados WHERE cderivado= ?";
+            try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setInt(1, pro);
+        rs = pst.executeQuery();
+                if (rs.next()) {
+                    derivado.setCd(rs.getInt("codigo"));
+                    derivado.setNombre(rs.getString("nombre"));
+                    derivado.setCderivado(rs.getInt("cderivado"));
+                    derivado.setNderivado(rs.getString("nderivado"));
+                    derivado.setDetalled(rs.getString("detalle"));
+                    derivado.setPrecio(rs.getFloat("precio"));
+                }
+            }catch(SQLException ex){
+                System.out.println(""+ex.toString());
+            }    finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }    
+    }
+            
+            return derivado;
+    }
+    
 }
