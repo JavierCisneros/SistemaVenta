@@ -12,13 +12,16 @@ package modelo;
 public class Venta {
     private float total;
     private String vendedor;
+    private String fecha;
+    private int cdventa;
 
-    public Venta() {
-    }
-
-    public Venta(float total, String vendedor) {
+    public Venta(float total, String vendedor, String fecha, int cdventa) {
         this.total = total;
         this.vendedor = vendedor;
+        this.fecha = fecha;
+        this.cdventa = cdventa;
+    }
+    public Venta() {
     }
 
     public float getTotal() {
@@ -35,6 +38,22 @@ public class Venta {
 
     public void setVendedor(String vendedor) {
         this.vendedor = vendedor;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public int getCdventa() {
+        return cdventa;
+    }
+
+    public void setCdventa(int cdventa) {
+        this.cdventa = cdventa;
     }
     
 }

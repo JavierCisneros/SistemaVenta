@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -110,5 +111,26 @@ public class CompraDB {
         }
     
     }
-    
+        public ArrayList ListarCompras(String from, String till) throws SQLException{
+    ArrayList<Compra> ListaC = new ArrayList();
+    String SQL = "SELECT * FROM `compras` WHERE `fecha` BETWEEN '"+from+"' AND '"+till+"'";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        rs = pst.executeQuery();
+        while(rs.next()){
+        Compra cp = new Compra();
+        cp.setCdcompra(rs.getInt("cdcompra"));
+        cp.setFecha(rs.getString("fecha"));
+        cp.setVendedor(rs.getString("vendedor"));
+        cp.setTotal(rs.getFloat("total"));
+        ListaC.add(cp);
+        }
+    }
+    catch(SQLException e){
+        System.out.println(""+e.getMessage());
+    }
+    return ListaC;
+    }
 }

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -158,5 +159,27 @@ public class VentaDB {
         System.out.println(""+e.toString());
     }
     }
+    }
+     public ArrayList ListarVentas(String from, String till) throws SQLException{
+    ArrayList<Venta> ListaV = new ArrayList();
+    String SQL = "SELECT * FROM `ventas` WHERE `fecha` BETWEEN '"+from+"' AND '"+till+"'";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        rs = pst.executeQuery();
+        while(rs.next()){
+        Venta vt = new Venta();
+        vt.setCdventa(rs.getInt("cdventa"));
+        vt.setFecha(rs.getString("fecha"));
+        vt.setVendedor(rs.getString("vendedor"));
+        vt.setTotal(rs.getFloat("total"));
+        ListaV.add(vt);
+        }
+    }
+    catch(SQLException e){
+        System.out.println(""+e.getMessage());
+    }
+    return ListaV;
     }
 }
