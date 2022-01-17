@@ -329,4 +329,62 @@ public class ProductosDB {
             
             return derivado;
     }
+      public ArrayList ConsultarDerivados(int cd){
+        ArrayList<Derivados> listader = new ArrayList();
+      String SQL = "SELECT * FROM derivados WHERE codigo = ?";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setInt(1, cd);
+        rs = pst.executeQuery();
+         Derivados de = new Derivados();
+      listader.add(de);
+          while(rs.next()){
+        Derivados der = new Derivados();
+        der.setCd(rs.getInt("codigo"));
+        der.setNombre(rs.getString("nombre"));
+        der.setCderivado(rs.getInt("cderivado"));
+        der.setNderivado(rs.getString("nderivado"));
+        der.setDetalled(rs.getString("detalle"));
+        der.setPrecio(rs.getFloat("precio"));
+        listader.add(der);
+        }
+    }
+    catch(SQLException e){
+    
+        System.out.println(""+ e.toString());
+    }
+    return listader;
+    }
+     public ArrayList ConsultarUnidades(int cd){
+        ArrayList<Unidades> listauni = new ArrayList();
+      String SQL = "SELECT * FROM unidades WHERE codigo = ?";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setInt(1, cd);
+        rs = pst.executeQuery();
+         Unidades un = new Unidades();
+         listauni.add(un);
+            while(rs.next()){
+        Unidades uni = new Unidades();
+        uni.setCodigo(rs.getInt("codigo"));
+        uni.setNombre(rs.getString("nombre"));
+        uni.setCdunidad(rs.getInt("cunidad"));
+        uni.setNunidad(rs.getString("nunidad"));
+        uni.setDetalleu(rs.getString("detalleu"));
+        uni.setPiezas(rs.getInt("piezasu"));
+        uni.setPreciou(rs.getFloat("preciou"));
+        listauni.add(uni);
+        }
+
+    }
+    catch(SQLException e){
+    
+        System.out.println(""+ e.toString());
+    }
+    return listauni;
+    }
 }

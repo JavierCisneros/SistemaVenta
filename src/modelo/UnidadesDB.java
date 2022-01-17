@@ -112,7 +112,6 @@ public class UnidadesDB {
         pst = con.prepareStatement(SQL);
         rs = pst.executeQuery();
         while(rs.next()){
-        Derivados der = new Derivados();
         Unidades uni = new Unidades();
         uni.setCodigo(rs.getInt("codigo"));
         uni.setNombre(rs.getString("nombre"));

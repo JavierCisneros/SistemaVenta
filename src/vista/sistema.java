@@ -103,8 +103,6 @@ public class sistema extends javax.swing.JFrame {
         
         cajas();
         
-        jtfStockP.setEnabled(false);
-        jtfPiezasP.setEnabled(false);
         jtfStockP.setText("0");
         jtfPiezasP.setText("0");
         
@@ -145,8 +143,6 @@ public class sistema extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jtfCodigoPV = new javax.swing.JTextField();
-        jLabel37 = new javax.swing.JLabel();
-        jtfNombrePV = new javax.swing.JTextField();
         jLabel38 = new javax.swing.JLabel();
         jtfCantidadPV = new javax.swing.JTextField();
         jLabel39 = new javax.swing.JLabel();
@@ -158,6 +154,7 @@ public class sistema extends javax.swing.JFrame {
         jtVenta = new javax.swing.JTable();
         jtfTotalPV = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
+        jcbOpciones = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jtfCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -271,7 +268,7 @@ public class sistema extends javax.swing.JFrame {
                 btnProductosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 101, -1));
+        jPanel1.add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 110, -1));
 
         btnVentas.setText("Ventas");
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
@@ -279,7 +276,7 @@ public class sistema extends javax.swing.JFrame {
                 btnVentasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 101, -1));
+        jPanel1.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
 
         btnCompras.setText("Compras");
         btnCompras.addActionListener(new java.awt.event.ActionListener() {
@@ -287,15 +284,15 @@ public class sistema extends javax.swing.JFrame {
                 btnComprasActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 101, -1));
+        jPanel1.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 110, -1));
 
-        btnAdministracion.setText("Administración");
+        btnAdministracion.setText("Administrar");
         btnAdministracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdministracionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, -1, -1));
+        jPanel1.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 110, -1));
 
         btnReportes.setText("Reportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -303,7 +300,7 @@ public class sistema extends javax.swing.JFrame {
                 btnReportesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 101, -1));
+        jPanel1.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 110, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Usuario:");
@@ -323,7 +320,7 @@ public class sistema extends javax.swing.JFrame {
                 btnCombosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCombos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 101, -1));
+        jPanel1.add(btnCombos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 110, -1));
 
         jlbUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jlbUsuario.setText("usuario");
@@ -335,7 +332,7 @@ public class sistema extends javax.swing.JFrame {
                 btnUnidadesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 100, -1));
+        jPanel1.add(btnUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 110, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 150, 515));
 
@@ -348,7 +345,7 @@ public class sistema extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 640, 69, -1));
 
         jlbFecha.setText("fecha");
-        getContentPane().add(jlbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 30, 164, -1));
+        getContentPane().add(jlbFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 30, 164, -1));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -367,26 +364,23 @@ public class sistema extends javax.swing.JFrame {
         });
         jPanel3.add(jtfCodigoPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 260, -1));
 
-        jLabel37.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel37.setText("Nombre");
-        jPanel3.add(jLabel37, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
-        jPanel3.add(jtfNombrePV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 260, -1));
-
         jLabel38.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel38.setText("Cantidad");
-        jPanel3.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
+        jPanel3.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
         jtfCantidadPV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfCantidadPVKeyPressed(evt);
             }
         });
-        jPanel3.add(jtfCantidadPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 260, -1));
+        jPanel3.add(jtfCantidadPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 260, -1));
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel39.setText("Total:");
         jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 520, -1, -1));
-        jPanel3.add(jtfPrecioPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 260, -1));
+
+        jtfPrecioPV.setEditable(false);
+        jPanel3.add(jtfPrecioPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 260, -1));
 
         btnAgregarPV.setText("Agregar");
         btnAgregarPV.addActionListener(new java.awt.event.ActionListener() {
@@ -444,7 +438,14 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel40.setText("Precio");
-        jPanel3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        jPanel3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
+
+        jcbOpciones.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbOpcionesItemStateChanged(evt);
+            }
+        });
+        jPanel3.add(jcbOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 260, -1));
 
         jtp.addTab("0", jPanel3);
 
@@ -474,7 +475,7 @@ public class sistema extends javax.swing.JFrame {
                 jtfNombreKeyPressed(evt);
             }
         });
-        jPanel2.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 125, -1));
+        jPanel2.add(jtfNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Detalle");
@@ -485,7 +486,7 @@ public class sistema extends javax.swing.JFrame {
                 jtfDetalleKeyPressed(evt);
             }
         });
-        jPanel2.add(jtfDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 125, -1));
+        jPanel2.add(jtfDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 130, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Unidad de medida");
@@ -509,7 +510,7 @@ public class sistema extends javax.swing.JFrame {
                 jtfPrecioKeyPressed(evt);
             }
         });
-        jPanel2.add(jtfPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 125, -1));
+        jPanel2.add(jtfPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 130, -1));
 
         jtfBase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -601,8 +602,8 @@ public class sistema extends javax.swing.JFrame {
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setText("Precio");
         jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
-        jPanel2.add(jtfStockP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 120, -1));
-        jPanel2.add(jtfPiezasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 120, -1));
+        jPanel2.add(jtfStockP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 130, -1));
+        jPanel2.add(jtfPiezasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 130, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel32.setText("Piezas");
@@ -626,19 +627,19 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Precio");
-        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
-        jPanel4.add(jtfPrecioD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 110, -1));
+        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        jPanel4.add(jtfPrecioD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 130, -1));
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel13.setText("Codigo granel");
-        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
-        jPanel4.add(jtfDetalleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 110, -1));
-        jPanel4.add(jtfCodigoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 110, -1));
+        jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        jPanel4.add(jtfDetalleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 130, -1));
+        jPanel4.add(jtfCodigoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 130, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Detalle");
-        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
-        jPanel4.add(jtfNombreD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 110, -1));
+        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        jPanel4.add(jtfNombreD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 130, -1));
 
         btnAgregarD.setText("Agregar");
         btnAgregarD.addActionListener(new java.awt.event.ActionListener() {
@@ -702,7 +703,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel18.setText("Nombre granel");
-        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jcbProductos.setEditable(true);
         jcbProductos.addItemListener(new java.awt.event.ItemListener() {
@@ -715,7 +716,7 @@ public class sistema extends javax.swing.JFrame {
                 jcbProductosActionPerformed(evt);
             }
         });
-        jPanel4.add(jcbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, -1));
+        jPanel4.add(jcbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 130, -1));
 
         jtp.addTab("2", jPanel4);
 
@@ -740,17 +741,17 @@ public class sistema extends javax.swing.JFrame {
                 jcbProductosUActionPerformed(evt);
             }
         });
-        jPanel6.add(jcbProductosU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, -1));
+        jPanel6.add(jcbProductosU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 150, -1));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setText("Codigo unidad");
         jPanel6.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
-        jPanel6.add(jtfCodigoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 110, -1));
+        jPanel6.add(jtfCodigoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 150, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel27.setText("Nombre unidad");
         jPanel6.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
-        jPanel6.add(jtfNombreU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 110, -1));
+        jPanel6.add(jtfNombreU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 150, -1));
 
         jLabel28.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel28.setText("Detalle");
@@ -761,17 +762,17 @@ public class sistema extends javax.swing.JFrame {
                 jtfDetalleUActionPerformed(evt);
             }
         });
-        jPanel6.add(jtfDetalleU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 110, -1));
+        jPanel6.add(jtfDetalleU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 150, -1));
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel29.setText("Precio");
-        jPanel6.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
-        jPanel6.add(jtfPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 110, -1));
+        jPanel6.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        jPanel6.add(jtfPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 150, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel30.setText("Piezas");
         jPanel6.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
-        jPanel6.add(jtfPiezasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 110, -1));
+        jPanel6.add(jtfPiezasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 150, -1));
 
         jtUnidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -871,7 +872,7 @@ public class sistema extends javax.swing.JFrame {
                 jtfEliminarCActionPerformed(evt);
             }
         });
-        jPanel5.add(jtfEliminarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 250, -1));
+        jPanel5.add(jtfEliminarC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 260, -1));
 
         jtCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1779,18 +1780,31 @@ public class sistema extends javax.swing.JFrame {
                 uni = pdb.BuscarUni(cod);
                 if (pro.getName() != null ) {
                     jtfPrecioPV.setText(""+pro.getPrecio());
-                    jtfNombrePV.setText(""+pro.getName());
                     jtfCantidadPV.requestFocus();
-
+                    //Carga de combobox 
+                    u = pdb.ConsultarUnidades(cod);
+                    d = pdb.ConsultarDerivados(cod);
+                    
+                    jcbOpciones.addItem(""+pro.getName());
+                    if (pro.getUdm()==2) {
+                    for (int i = 1; i < u.size(); i++) {
+                        jcbOpciones.addItem(""+u.get(i).getNunidad());
+                    }
+                    }
+                    if (pro.getUdm()==1) {
+                        
+                    for (int i = 1; i < d.size(); i++) {
+                        jcbOpciones.addItem(""+d.get(i).getNderivado());
+                    }
+                    }
+                    
                 }
                 else if (der.getNderivado() != null) {
-                    jtfNombrePV.setText(""+der.getNderivado());
                     jtfPrecioPV.setText(""+der.getPrecio());
                     jtfCantidadPV.requestFocus();
                 
                 }
                 else if (uni.getNunidad() != null) {
-                    jtfNombrePV.setText(""+uni.getNunidad());
                     jtfPrecioPV.setText(""+uni.getPreciou());
                     jtfCantidadPV.requestFocus();
               
@@ -1823,14 +1837,14 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
          if(!jtfCantidadPV.getText().equals("")){
             String cod = jtfCodigoPV.getText();
-            String nombre = jtfNombrePV.getText();
+            String nombre = jcbOpciones.getSelectedItem().toString();
             float cant = Float.parseFloat(jtfCantidadPV.getText());
             float precio = Float.parseFloat(jtfPrecioPV.getText());
             float total = precio * cant;
             itemv = itemv +1;
             tmv = (DefaultTableModel) jtVenta.getModel();
             for (int i = 0; i < jtVenta.getRowCount(); i++) {
-                if (jtVenta.getValueAt(i, 0).equals(jtfCodigoPV.getText())) {
+                if (jtVenta.getValueAt(i, 0).equals(codePV)) {
                     JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
                     LimpiarVenta();
                     TotalV();
@@ -1840,7 +1854,7 @@ public class sistema extends javax.swing.JFrame {
             }
             ArrayList lista = new ArrayList();
             lista.add(itemv);
-            lista.add(cod);
+            lista.add(codePV);
             lista.add(nombre);
             lista.add(cant);
             lista.add(precio);
@@ -1926,6 +1940,32 @@ public class sistema extends javax.swing.JFrame {
     private void jcbBaseStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jcbBaseStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbBaseStateChanged
+
+    private void jcbOpcionesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbOpcionesItemStateChanged
+        // TODO add your handling code here:
+         
+           try{
+                 int n = jcbOpciones.getSelectedIndex();
+        if(jcbOpciones.getSelectedIndex()!=0){
+        if(pro.getUdm()==2){
+        jtfPrecioPV.setText(""+u.get(n).getPreciou());
+        codePV = u.get(n).getCdunidad();
+        }
+        if(pro.getUdm()==1){
+        jtfPrecioPV.setText(""+ d.get(n).getPrecio());
+        codePV = d.get(n).getCderivado();
+        }
+        }
+        else{
+        jtfPrecioPV.setText(""+pro.getPrecio());
+        codePV = pro.getCd();
+        }
+        jtfCantidadPV.requestFocus();
+           }
+           catch(Exception ex){
+               System.out.println("Combo box");
+           }
+    }//GEN-LAST:event_jcbOpcionesItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -2243,7 +2283,7 @@ public class sistema extends javax.swing.JFrame {
         AutoCompleteDecorator.decorate(jcbProductosU );
     }
     private void LimpiarVenta(){
-    jtfNombrePV.setText("");
+        jcbOpciones.removeAllItems();
     jtfCodigoPV.setText("");
     jtfCantidadPV.setText("");
     jtfPrecioPV.setText("");
@@ -2304,7 +2344,6 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -2335,6 +2374,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JCheckBox jcbBase;
+    private javax.swing.JComboBox<String> jcbOpciones;
     private javax.swing.JComboBox<String> jcbProductos;
     private javax.swing.JComboBox<String> jcbProductosU;
     private javax.swing.JComboBox<String> jcbTipo;
@@ -2366,7 +2406,6 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfNombreC;
     private javax.swing.JTextField jtfNombreD;
-    private javax.swing.JTextField jtfNombrePV;
     private javax.swing.JTextField jtfNombreU;
     private javax.swing.JTextField jtfPiezasP;
     private javax.swing.JTextField jtfPiezasU;
