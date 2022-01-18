@@ -6,6 +6,8 @@
 package vista;
 
 import Control.database;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,10 @@ public class Administracion extends javax.swing.JFrame {
      */
     public Administracion() {
         initComponents();
+                setSize(411, 420);
+        Toolkit tk=Toolkit.getDefaultToolkit();
+        Dimension d=tk.getScreenSize();
+        setLocation((d.width-getSize().width)/2,(d.height-getSize().height)/2);
     }
 
     /**
@@ -80,7 +86,7 @@ public class Administracion extends javax.swing.JFrame {
         getContentPane().add(jtfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 110, 331, -1));
         getContentPane().add(jtfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 177, 331, -1));
 
-        jcbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Administrador", "Empleado", " " }));
+        jcbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Administrador", " " }));
         getContentPane().add(jcbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 247, 331, -1));
 
         pack();

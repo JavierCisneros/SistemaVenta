@@ -106,10 +106,10 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
-             vista.sistema ventana = new vista.sistema();
-            ventana.setVisible(true);
+            /* vista.sistema ventana = new vista.sistema();
+            ventana.setVisible(true);*/
        
-     /*  try {
+       try {
       int resultado = database.validarUsuario(String.valueOf(jtfPassword.getPassword()),jtfUsuario.getText());
         if (resultado==1) {
             vista.sistema ventana = new vista.sistema();
@@ -118,7 +118,7 @@ public class Login extends javax.swing.JFrame {
         }
     } catch (SQLException ex) {
         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-    }*/
+    }
     
     }//GEN-LAST:event_btnAccederActionPerformed
 

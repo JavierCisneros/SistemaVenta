@@ -15,16 +15,13 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTabbedPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -93,10 +90,22 @@ public class sistema extends javax.swing.JFrame {
         jlbFecha.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         jlbUsuario.setText(""+database.name);
         jlbRol.setText(""+rol());
-        if(database.rol==3){
-         btnCombos.setEnabled(false);
-         btnAdministracion.setEnabled(false);
+        if(database.rol==0){
+         btnAdministrar.setEnabled(false);
+         btnAgregar.setEnabled(false);
+         btnEditar.setEnabled(false);
+         btnEliminar.setEnabled(false);
+         btnLimpiar.setEnabled(false);
+         btnAgregarG.setEnabled(false);
+         btnEditarG.setEnabled(false);
+         btnEliminarG.setEnabled(false);
+         btnAgregarU.setEnabled(false);
+         btnEditarU.setEnabled(false);
+         btnEliminarU.setEnabled(false);
+         btnCompras.setEnabled(false);
+         btnAdministrar.setEnabled(false);
         }
+      
         jtfCodigo.requestFocus();
         jtfBase.setText("1");
         jtfBase.setEnabled(false);
@@ -110,6 +119,7 @@ public class sistema extends javax.swing.JFrame {
         jtfBase.setVisible(false);
         jcbBase.setVisible(false);
         
+
     }
 
     /**
@@ -128,7 +138,7 @@ public class sistema extends javax.swing.JFrame {
         btnProductos = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         btnCompras = new javax.swing.JButton();
-        btnAdministracion = new javax.swing.JButton();
+        btnAdministrar = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -188,9 +198,9 @@ public class sistema extends javax.swing.JFrame {
         jtfCodigoD = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jtfNombreD = new javax.swing.JTextField();
-        btnAgregarD = new javax.swing.JButton();
-        btnEditarD = new javax.swing.JButton();
-        btnEliminarD = new javax.swing.JButton();
+        btnAgregarG = new javax.swing.JButton();
+        btnEditarG = new javax.swing.JButton();
+        btnEliminarG = new javax.swing.JButton();
         jLabel17 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jtableD = new javax.swing.JTable();
@@ -286,13 +296,13 @@ public class sistema extends javax.swing.JFrame {
         });
         jPanel1.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 110, -1));
 
-        btnAdministracion.setText("Administrar");
-        btnAdministracion.addActionListener(new java.awt.event.ActionListener() {
+        btnAdministrar.setText("Administrar");
+        btnAdministrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAdministracionActionPerformed(evt);
+                btnAdministrarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 110, -1));
+        jPanel1.add(btnAdministrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 110, -1));
 
         btnReportes.setText("Reportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
@@ -641,29 +651,29 @@ public class sistema extends javax.swing.JFrame {
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
         jPanel4.add(jtfNombreD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 130, -1));
 
-        btnAgregarD.setText("Agregar");
-        btnAgregarD.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregarG.setText("Agregar");
+        btnAgregarG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarDActionPerformed(evt);
+                btnAgregarGActionPerformed(evt);
             }
         });
-        jPanel4.add(btnAgregarD, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 100, -1));
+        jPanel4.add(btnAgregarG, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 510, 100, -1));
 
-        btnEditarD.setText("Editar");
-        btnEditarD.addActionListener(new java.awt.event.ActionListener() {
+        btnEditarG.setText("Editar");
+        btnEditarG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarDActionPerformed(evt);
+                btnEditarGActionPerformed(evt);
             }
         });
-        jPanel4.add(btnEditarD, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 510, 100, -1));
+        jPanel4.add(btnEditarG, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 510, 100, -1));
 
-        btnEliminarD.setText("Eliminar");
-        btnEliminarD.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarG.setText("Eliminar");
+        btnEliminarG.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarDActionPerformed(evt);
+                btnEliminarGActionPerformed(evt);
             }
         });
-        jPanel4.add(btnEliminarD, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, 90, -1));
+        jPanel4.add(btnEliminarG, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, 90, -1));
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Granel");
@@ -849,6 +859,12 @@ public class sistema extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel20.setText("Cantidad");
         jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+
+        jtfPrecioC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfPrecioCKeyPressed(evt);
+            }
+        });
         jPanel5.add(jtfPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 260, -1));
 
         jtfCantidadC.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -924,6 +940,8 @@ public class sistema extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel23.setText("Precio");
         jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+
+        jtfTotalC.setEditable(false);
         jPanel5.add(jtfTotalC, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 510, 160, -1));
 
         jtp.addTab("4", jPanel5);
@@ -1048,13 +1066,13 @@ public class sistema extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
+    private void btnAdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministrarActionPerformed
         // TODO add your handling code here:
         vista.Administracion ventana = new vista.Administracion();
         ventana.setVisible(true);
         this.dispose();
         jtp.setSelectedIndex(5);
-    }//GEN-LAST:event_btnAdministracionActionPerformed
+    }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
         // TODO add your handling code here
@@ -1109,7 +1127,6 @@ public class sistema extends javax.swing.JFrame {
                 pro = pdb.BuscarPro(cod);
                 if (pro.getName() != null) {
                     jtfNombreC.setText(""+pro.getName());
-                    jtfPrecioC.setText(""+pro.getPrecio());
                     jtfCantidadC.requestFocus();
                 }
                 else{
@@ -1187,7 +1204,7 @@ public class sistema extends javax.swing.JFrame {
     private void jtfCantidadCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCantidadCKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnAgregarC.doClick();
+            jtfPrecioC.requestFocus();
         }
     }//GEN-LAST:event_jtfCantidadCKeyPressed
 
@@ -1378,7 +1395,7 @@ public class sistema extends javax.swing.JFrame {
         jtfPrecioD.setText(jtableD.getValueAt(fila,5).toString());
     }//GEN-LAST:event_jtableDMouseClicked
 
-    private void btnEliminarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDActionPerformed
+    private void btnEliminarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarGActionPerformed
         // TODO add your handling code here:
         if(!"".equals(jtfCodigoD.getText())){
             int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea eliminar este producto?");
@@ -1394,9 +1411,9 @@ public class sistema extends javax.swing.JFrame {
                 }
             }
         }
-    }//GEN-LAST:event_btnEliminarDActionPerformed
+    }//GEN-LAST:event_btnEliminarGActionPerformed
 
-    private void btnEditarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarDActionPerformed
+    private void btnEditarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarGActionPerformed
         // TODO add your handling code here:
         int resultado=0;
         if(!"".equals(jcbProductos.getSelectedItem())){
@@ -1449,9 +1466,9 @@ public class sistema extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Este producto ya esta registrado");
             }
         }
-    }//GEN-LAST:event_btnEditarDActionPerformed
+    }//GEN-LAST:event_btnEditarGActionPerformed
 
-    private void btnAgregarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDActionPerformed
+    private void btnAgregarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarGActionPerformed
         // TODO add your handling code here:
         int resultado=0;
         if(!"".equals(jcbProductos.getSelectedItem())){
@@ -1505,7 +1522,7 @@ public class sistema extends javax.swing.JFrame {
             }
         }
 
-    }//GEN-LAST:event_btnAgregarDActionPerformed
+    }//GEN-LAST:event_btnAgregarGActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
@@ -1633,6 +1650,7 @@ public class sistema extends javax.swing.JFrame {
         String detalle;
         int unidad;
         float precio;
+        try{
         if(Numeros(jtfBase.getText())){
             if(Numeros(jtfBase.getText()) && Float.parseFloat(jtfBase.getText())<=1 && Float.parseFloat(jtfBase.getText())>0){
                 base = Float.parseFloat(jtfBase.getText());
@@ -1687,6 +1705,9 @@ public class sistema extends javax.swing.JFrame {
         pro.setDetalle(detalle);
         pro.setStock(Float.parseFloat(jtfStockP.getText()));
         pro.setPiezas(Integer.parseInt(jtfPiezasP.getText()));
+        }catch(Exception e ){
+            System.out.println("Error al agregar producto");
+        }
         if(resultado==0){
             boolean res = pdb.agregarP(pro);
             if(res){
@@ -1778,12 +1799,13 @@ public class sistema extends javax.swing.JFrame {
                 pro = pdb.BuscarPro(cod);
                 der = pdb.BuscarDer(cod);
                 uni = pdb.BuscarUni(cod);
+                u = pdb.ConsultarUnidades(cod);
+                d = pdb.ConsultarDerivados(cod);
                 if (pro.getName() != null ) {
                     jtfPrecioPV.setText(""+pro.getPrecio());
                     jtfCantidadPV.requestFocus();
                     //Carga de combobox 
-                    u = pdb.ConsultarUnidades(cod);
-                    d = pdb.ConsultarDerivados(cod);
+                    
                     
                     jcbOpciones.addItem(""+pro.getName());
                     if (pro.getUdm()==2) {
@@ -1800,14 +1822,19 @@ public class sistema extends javax.swing.JFrame {
                     
                 }
                 else if (der.getNderivado() != null) {
-                    jtfPrecioPV.setText(""+der.getPrecio());
+                    
+                    jcbOpciones.addItem(""+der.getNderivado());
                     jtfCantidadPV.requestFocus();
-                
+                    jtfPrecioPV.setText(""+der.getPrecio());
+                    codePV = der.getCderivado();
                 }
                 else if (uni.getNunidad() != null) {
-                    jtfPrecioPV.setText(""+uni.getPreciou());
+                 
+                    System.out.println("Precio"+uni.getPreciou());
                     jtfCantidadPV.requestFocus();
-              
+                    jcbOpciones.addItem(""+uni.getNunidad());
+                       jtfPrecioPV.setText(""+uni.getPreciou());
+                    codePV = uni.getCdunidad();
                 }
                 else{
                     LimpiarVenta();
@@ -1886,11 +1913,14 @@ public class sistema extends javax.swing.JFrame {
 
     private void btnVenderPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderPVActionPerformed
         // TODO add your handling code here:
+
         RegistrarVenta();
         RegistrarDetalleV();
+        Tickets();
         ActualizarStockV();
         LimpiarVenta();
         LimpiarTableV();
+      
     }//GEN-LAST:event_btnVenderPVActionPerformed
 
     private void btnBuscarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVentasActionPerformed
@@ -1966,6 +1996,13 @@ public class sistema extends javax.swing.JFrame {
                System.out.println("Combo box");
            }
     }//GEN-LAST:event_jcbOpcionesItemStateChanged
+
+    private void jtfPrecioCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioCKeyPressed
+        // TODO add your handling code here:
+          if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            btnAgregarC.doClick();
+        }
+    }//GEN-LAST:event_jtfPrecioCKeyPressed
 
     /**
      * @param args the command line arguments
@@ -2289,22 +2326,41 @@ public class sistema extends javax.swing.JFrame {
     jtfPrecioPV.setText("");
     jtfTotalPV.setText("");
         }
+    
+    private void Tickets(){
+        int numFila = jtVenta.getRowCount();
+        String fila="";
+          for (int i = 0; i < numFila; i++) {
+            String nom = ""+jtVenta.getModel().getValueAt(i, 1);
+            String can = String.format("%.2f",jtVenta.getValueAt(i, 2));
+            String sub = String.format("%.2f",jtVenta.getValueAt(i, 4));
+            fila += (can+"  "+nom+"  "+sub+"\n");
+            
+        }
+    String date = ""+jlbFecha.getText();
+    String id = ""+vdb.idVenta();
+    String caissier = ""+jlbUsuario.getText();
+    String total = jtfTotalPV.getText();
+    Ticket ticket = new Ticket(id, caissier, date, fila, total);
+    ticket.print();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntRegC;
-    private javax.swing.JButton btnAdministracion;
+    private javax.swing.JButton btnAdministrar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarC;
-    private javax.swing.JButton btnAgregarD;
+    private javax.swing.JButton btnAgregarG;
     private javax.swing.JButton btnAgregarPV;
     private javax.swing.JButton btnAgregarU;
     private javax.swing.JButton btnBuscarVentas;
     private javax.swing.JButton btnCombos;
     private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnEditar;
-    private javax.swing.JButton btnEditarD;
+    private javax.swing.JButton btnEditarG;
     private javax.swing.JButton btnEditarU;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnEliminarD;
+    private javax.swing.JButton btnEliminarG;
     private javax.swing.JButton btnEliminarPV;
     private javax.swing.JButton btnEliminarU;
     private javax.swing.JButton btnLimpiar;
