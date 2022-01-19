@@ -40,6 +40,7 @@ public class ProductosDB {
         return true;
     }
     catch(Exception ex){
+        System.out.println(""+ex);
         return false;
     }
     finally{

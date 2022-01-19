@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Login extends javax.swing.JFrame {
         setLocation((d.width-getSize().width)/2,(d.height-getSize().height)/2);
         jtfUsuario.requestFocus();
         jtfUsuario.selectAll();
-
+         setIconImage(new ImageIcon(getClass().getResource("/img/candy16.png")).getImage());
         
     }
 
@@ -44,33 +45,27 @@ public class Login extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jtfUsuario = new javax.swing.JTextField();
         btnAcceder = new javax.swing.JButton();
         jtfPassword = new javax.swing.JPasswordField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         jLabel1.setText("INICIO DE SESIÓN");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 27, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
 
-        btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 70, -1));
-
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Usuario:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 100, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Contraseña:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 166, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
 
         jtfUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -80,30 +75,29 @@ public class Login extends javax.swing.JFrame {
                 jtfUsuarioKeyTyped(evt);
             }
         });
-        getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 132, 223, -1));
+        getContentPane().add(jtfUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 223, -1));
 
+        btnAcceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/iniciar-sesion.png"))); // NOI18N
         btnAcceder.setText("Acceder");
         btnAcceder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAccederActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+        getContentPane().add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, -1, -1));
 
         jtfPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfPasswordKeyPressed(evt);
             }
         });
-        getContentPane().add(jtfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 220, -1));
+        getContentPane().add(jtfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 220, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/perfil-del-usuario.png"))); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        // TODO add your handling code here:
-         this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
             /* vista.sistema ventana = new vista.sistema();
@@ -179,10 +173,10 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcceder;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jtfPassword;
     private javax.swing.JTextField jtfUsuario;
     // End of variables declaration//GEN-END:variables

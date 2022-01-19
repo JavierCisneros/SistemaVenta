@@ -18,10 +18,10 @@ import javax.swing.JOptionPane;
  * @author yopri
  */
 public class Ticket {
-  private String contentTicket = "DULCERIA \n"+
+  private String contentTicket = "DULCERIA MAYTA\n"+
     "Hacienda de la reyna #587.\n"+
-    "=============================\n"+
     "Tonala Jalisco\n"+
+    "=============================\n"+
     "Ticket # {{ticket}}\n"+
     "LE ATENDIO: {{cajero}}\n"+
     "{{dateTime}}\n"+
