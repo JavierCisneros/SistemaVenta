@@ -133,6 +133,9 @@ public class sistema extends javax.swing.JFrame {
         jtfBase.setVisible(false);
         jcbBase.setVisible(false);
         
+        jtfTotalC.setText("0.00");
+        jtfTotalPV.setText("0.00");
+        
         setIconImage(new ImageIcon(getClass().getResource("/img/candy16.png")).getImage());
     }
 
@@ -424,6 +427,9 @@ public class sistema extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfCodigoPVKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCodigoPVKeyTyped(evt);
+            }
         });
         jPanel3.add(jtfCodigoPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 260, -1));
 
@@ -578,10 +584,15 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Unidad de medida");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
 
         jcbUnidad.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jcbUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kg - Kilogramo", "U - Unidad" }));
+        jcbUnidad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbUnidadItemStateChanged(evt);
+            }
+        });
         jcbUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbUnidadActionPerformed(evt);
@@ -592,7 +603,7 @@ public class sistema extends javax.swing.JFrame {
                 jcbUnidadKeyPressed(evt);
             }
         });
-        jPanel2.add(jcbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 200, -1));
+        jPanel2.add(jcbUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 200, -1));
 
         jtfPrecio.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -600,7 +611,7 @@ public class sistema extends javax.swing.JFrame {
                 jtfPrecioKeyPressed(evt);
             }
         });
-        jPanel2.add(jtfPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 200, -1));
+        jPanel2.add(jtfPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 200, -1));
 
         jtfBase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -694,7 +705,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Productos");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel21.setText("Stock");
@@ -702,7 +713,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel31.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel31.setText("Precio");
-        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+        jPanel2.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jtfStockP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtfStockP.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -780,6 +791,9 @@ public class sistema extends javax.swing.JFrame {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtfCodigoDKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCodigoDKeyTyped(evt);
+            }
         });
         jPanel4.add(jtfCodigoD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 210, -1));
 
@@ -827,7 +841,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel17.setText("Granel");
-        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, -1, -1));
 
         jtableD.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtableD.setModel(new javax.swing.table.DefaultTableModel(
@@ -936,6 +950,15 @@ public class sistema extends javax.swing.JFrame {
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setText("Codigo unidad");
         jPanel6.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jtfCodigoU.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfCodigoUKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCodigoUKeyTyped(evt);
+            }
+        });
         jPanel6.add(jtfCodigoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 200, -1));
 
         jLabel27.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -1169,6 +1192,9 @@ public class sistema extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfCodigoCKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfCodigoCKeyTyped(evt);
+            }
         });
         jPanel5.add(jtfCodigoC, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 260, -1));
 
@@ -1177,7 +1203,7 @@ public class sistema extends javax.swing.JFrame {
         jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jtfTotalC.setEditable(false);
-        jtfTotalC.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jtfTotalC.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jtfTotalC.setForeground(new java.awt.Color(204, 0, 0));
         jPanel5.add(jtfTotalC, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 470, 170, -1));
 
@@ -1256,9 +1282,9 @@ public class sistema extends javax.swing.JFrame {
 
         jPanel8.add(jtp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1220, 560));
 
-        jlbSeccion1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jlbSeccion1.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
         jlbSeccion1.setForeground(new java.awt.Color(51, 102, 255));
-        jlbSeccion1.setText("Dulceria Mayta");
+        jlbSeccion1.setText("DULCERIA MAYTA");
         jPanel8.add(jlbSeccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 220, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/azul_back.jpg"))); // NOI18N
@@ -1326,18 +1352,28 @@ public class sistema extends javax.swing.JFrame {
 
     private void bntRegCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntRegCActionPerformed
         // TODO add your handling code here:
+        try{
         RegistrarCompra();
         RegistrarDetalleC();
         ActualizarStock();
         LimpiarCompra();
         LimpiarTableC();
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Ingrese Productos en la tabla compra");
+        }
     }//GEN-LAST:event_bntRegCActionPerformed
 
     private void jtfEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfEliminarCActionPerformed
         // TODO add your handling code here:
+        try{
         tmp = (DefaultTableModel) jtCompra.getModel();
         tmp.removeRow(jtCompra.getSelectedRow());
-        Total();
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Seleccione un producto a eliminar");
+        }
+         Total();
         jtfCodigoC.requestFocus();
     }//GEN-LAST:event_jtfEliminarCActionPerformed
 
@@ -1979,7 +2015,7 @@ public class sistema extends javax.swing.JFrame {
     private void jtfPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            jtfStockP.requestFocus();
+            jcbUnidad.requestFocus();
             
         }
     }//GEN-LAST:event_jtfPrecioKeyPressed
@@ -1987,7 +2023,7 @@ public class sistema extends javax.swing.JFrame {
     private void jcbUnidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcbUnidadKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            jtfPrecio.requestFocus();
+            jtfStockP.requestFocus();
         }
     }//GEN-LAST:event_jcbUnidadKeyPressed
 
@@ -1998,7 +2034,7 @@ public class sistema extends javax.swing.JFrame {
     private void jtfDetalleKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDetalleKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            jcbUnidad.requestFocus();
+            jtfPrecio.requestFocus();
         }
     }//GEN-LAST:event_jtfDetalleKeyPressed
 
@@ -2011,7 +2047,10 @@ public class sistema extends javax.swing.JFrame {
 
     private void jtfCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoKeyTyped
         // TODO add your handling code here:
-
+           char car = evt.getKeyChar();
+        if((car<'0' || car>'9')){ 
+            evt.consume();
+        }
         jtfCodigo.addKeyListener(new KeyAdapter(){
             @Override
             public void keyReleased(KeyEvent ke) {
@@ -2101,6 +2140,7 @@ public class sistema extends javax.swing.JFrame {
         }
         catch(Exception e ){
         Logger.getLogger(""+e);
+         JOptionPane.showMessageDialog(null, "Seleccione un producto a eliminar");
         }
         TotalV();
         jtfCodigoPV.requestFocus();
@@ -2520,6 +2560,55 @@ public class sistema extends javax.swing.JFrame {
            }
     }//GEN-LAST:event_jtfPrecioUKeyPressed
 
+    private void jcbUnidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbUnidadItemStateChanged
+        // TODO add your handling code here:
+        int udmc = jcbUnidad.getSelectedIndex();
+        if(udmc==1){
+        jtfPiezasP.setEnabled(false);
+        }
+        if(udmc!=1){
+            jtfPiezasP.setEnabled(true);
+        }
+    }//GEN-LAST:event_jcbUnidadItemStateChanged
+
+    private void jtfCodigoPVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoPVKeyTyped
+        // TODO add your handling code here:
+           char car = evt.getKeyChar();
+        if((car<'0' || car>'9')){ 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfCodigoPVKeyTyped
+
+    private void jtfCodigoDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoDKeyTyped
+        // TODO add your handling code here:
+           char car = evt.getKeyChar();
+        if((car<'0' || car>'9')){ 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfCodigoDKeyTyped
+
+    private void jtfCodigoUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoUKeyPressed
+        // TODO add your handling code here:
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+               jtfNombreU.requestFocus();
+           }
+    }//GEN-LAST:event_jtfCodigoUKeyPressed
+
+    private void jtfCodigoUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoUKeyTyped
+        // TODO add your handling code here:
+           char car = evt.getKeyChar();
+        if((car<'0' || car>'9')){ 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfCodigoUKeyTyped
+
+    private void jtfCodigoCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoCKeyTyped
+        // TODO add your handling code here:
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+               jcbProductosU.requestFocus();
+           }
+    }//GEN-LAST:event_jtfCodigoCKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -2777,10 +2866,12 @@ public class sistema extends javax.swing.JFrame {
         int id = cdb.idVenta();
         for (int i = 0; i < jtCompra.getRowCount(); i++) {
             String cod = jtCompra.getValueAt(i, 0).toString();
+            String nom = jtCompra.getValueAt(i, 1).toString();
             Float cant = Float.parseFloat(jtCompra.getValueAt(i, 2).toString());
             Float pre = Float.parseFloat(jtCompra.getValueAt(i, 3).toString());
             Float sub = pre * cant;
             cd.setCdproducto(cod);
+            cd.setNombre(nom);
             cd.setCantidad(cant);
             cd.setPrecio(pre);
             cd.setSubtotal(sub);
@@ -2792,10 +2883,12 @@ public class sistema extends javax.swing.JFrame {
         int id = vdb.idVenta();
         for (int i = 0; i < jtVenta.getRowCount(); i++) {
             String cod = jtVenta.getValueAt(i, 0).toString();
+            String nom = jtVenta.getValueAt(i, 1).toString();
             Float cant = Float.parseFloat(jtVenta.getValueAt(i, 2).toString());
             Float pre = Float.parseFloat(jtVenta.getValueAt(i, 3).toString());
             Float sub = pre * cant;
             vd.setCdproducto(cod);
+            vd.setNombre(nom);
             vd.setCantidad(cant);
             vd.setPrecio(pre);
             vd.setSubtotal(sub);

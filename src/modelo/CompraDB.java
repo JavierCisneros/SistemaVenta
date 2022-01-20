@@ -43,16 +43,17 @@ public class CompraDB {
         return r;
     }
     public int registarDetalleC(DetalleCompra dc){
-    String SQL = "INSERT INTO detallecompra (`cdproducto`, `cantidad`, `precio`, `subtotal`, `cdcompra`) VALUES (?,?,?,?,?) ";
+    String SQL = "INSERT INTO detallecompra (`cdproducto`,`nombre`, `cantidad`, `precio`, `subtotal`, `cdcompra`) VALUES (?,?,?,?,?,?) ";
         try {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
         pst.setString(1, dc.getCdproducto());
-        pst.setFloat(2, dc.getCantidad());
-        pst.setFloat(3, dc.getPrecio());
-        pst.setFloat(4, dc.getSubtotal());
-        pst.setInt(5, dc.getCdcompra());
+        pst.setString(2, dc.getNombre());
+        pst.setFloat(3, dc.getCantidad());
+        pst.setFloat(4, dc.getPrecio());
+        pst.setFloat(5, dc.getSubtotal());
+        pst.setInt(6, dc.getCdcompra());
         pst.execute();
         } catch (SQLException ex) {
             System.out.println("error detalle:"+ex.toString());

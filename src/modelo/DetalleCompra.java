@@ -11,6 +11,7 @@ package modelo;
  */
 public class DetalleCompra {
     private String cdproducto;
+    private String nombre;
     private float cantidad;
     private float precio;
     private float subtotal;
@@ -19,12 +20,13 @@ public class DetalleCompra {
     public DetalleCompra() {
     }
 
-    public DetalleCompra(String cdproducto, float cantidad, float precio,float subtotal, int cdcompra) {
+    public DetalleCompra(String cdproducto, String nombre, float cantidad, float precio,float subtotal, int cdcompra) {
         this.cdproducto = cdproducto;
         this.cantidad = cantidad;
         this.precio = precio;
         this.cdcompra = cdcompra;
         this.subtotal = subtotal;
+        this.nombre = nombre;
     }
 
     public String getCdproducto() {
@@ -65,6 +67,14 @@ public class DetalleCompra {
 
     public void setSubtotal(float subtotal) {
         this.subtotal = subtotal;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
 }
