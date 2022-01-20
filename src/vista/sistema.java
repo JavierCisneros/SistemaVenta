@@ -135,7 +135,7 @@ public class sistema extends javax.swing.JFrame {
         
         jtfTotalC.setText("0.00");
         jtfTotalPV.setText("0.00");
-        
+        jtfCodigoPV.requestFocus();
         setIconImage(new ImageIcon(getClass().getResource("/img/candy16.png")).getImage());
     }
 
@@ -190,6 +190,7 @@ public class sistema extends javax.swing.JFrame {
         jtfTotalPV = new javax.swing.JTextField();
         jLabel40 = new javax.swing.JLabel();
         jcbOpciones = new javax.swing.JComboBox<>();
+        btnLimpiarPV = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jtfCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -215,6 +216,8 @@ public class sistema extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         btnLimpiar = new javax.swing.JButton();
         btnCodigoP = new javax.swing.JButton();
+        jtfBuscar = new javax.swing.JTextField();
+        jLabel47 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -234,6 +237,8 @@ public class sistema extends javax.swing.JFrame {
         jcbProductos = new javax.swing.JComboBox<>();
         btnLimpiarD = new javax.swing.JButton();
         btnCodigoG = new javax.swing.JButton();
+        jtfBuscarG = new javax.swing.JTextField();
+        jLabel48 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -255,6 +260,8 @@ public class sistema extends javax.swing.JFrame {
         btnEliminarU = new javax.swing.JButton();
         btnLimpiarU = new javax.swing.JButton();
         btnCodigoU = new javax.swing.JButton();
+        jtfBuscarU = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -278,12 +285,13 @@ public class sistema extends javax.swing.JFrame {
         jLabel41 = new javax.swing.JLabel();
         jtcTill = new com.toedter.calendar.JDateChooser();
         jLabel42 = new javax.swing.JLabel();
-        btnBuscarVentas = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jtReportes = new javax.swing.JTable();
+        btnDetalle = new javax.swing.JButton();
+        btnBuscarVentas1 = new javax.swing.JButton();
         jcbTipo = new javax.swing.JComboBox<>();
         jLabel43 = new javax.swing.JLabel();
         jtfTotalR = new javax.swing.JTextField();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jtReportes = new javax.swing.JTable();
         jlbSeccion1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -423,6 +431,11 @@ public class sistema extends javax.swing.JFrame {
         jPanel3.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jtfCodigoPV.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtfCodigoPV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodigoPVActionPerformed(evt);
+            }
+        });
         jtfCodigoPV.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfCodigoPVKeyPressed(evt);
@@ -455,7 +468,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel39.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel39.setText("Total:");
-        jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 490, -1, -1));
+        jPanel3.add(jLabel39, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 500, -1, -1));
 
         jtfPrecioPV.setEditable(false);
         jtfPrecioPV.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -488,6 +501,7 @@ public class sistema extends javax.swing.JFrame {
         });
         jPanel3.add(btnVenderPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 260, -1));
 
+        jtVenta.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 2, true));
         jtVenta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -511,6 +525,8 @@ public class sistema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtVenta.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jtVenta.getTableHeader().setReorderingAllowed(false);
         jScrollPane5.setViewportView(jtVenta);
 
         jPanel3.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 690, 420));
@@ -536,6 +552,14 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jcbOpciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 260, -1));
+
+        btnLimpiarPV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escoba.png"))); // NOI18N
+        btnLimpiarPV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarPVActionPerformed(evt);
+            }
+        });
+        jPanel3.add(btnLimpiarPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
 
         jtp.addTab("0", jPanel3);
 
@@ -694,6 +718,7 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jtableP.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jtableP.getTableHeader().setReorderingAllowed(false);
         jtableP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtablePMouseClicked(evt);
@@ -701,7 +726,7 @@ public class sistema extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jtableP);
 
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 760, 420));
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, 760, 410));
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Productos");
@@ -752,6 +777,16 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnCodigoP, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 120, -1));
+
+        jtfBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfBuscarKeyTyped(evt);
+            }
+        });
+        jPanel2.add(jtfBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 150, -1));
+
+        jLabel47.setText("Buscar:");
+        jPanel2.add(jLabel47, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
 
         jtp.addTab("1", jPanel2);
 
@@ -867,6 +902,7 @@ public class sistema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtableD.getTableHeader().setReorderingAllowed(false);
         jtableD.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtableDMouseClicked(evt);
@@ -915,6 +951,16 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnCodigoG, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 480, 120, -1));
+
+        jtfBuscarG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfBuscarGKeyTyped(evt);
+            }
+        });
+        jPanel4.add(jtfBuscarG, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 150, -1));
+
+        jLabel48.setText("Buscar:");
+        jPanel4.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
 
         jtp.addTab("2", jPanel4);
 
@@ -1034,6 +1080,7 @@ public class sistema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtUnidades.getTableHeader().setReorderingAllowed(false);
         jtUnidades.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jtUnidadesMouseClicked(evt);
@@ -1087,6 +1134,16 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jPanel6.add(btnCodigoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 480, 120, -1));
+
+        jtfBuscarU.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfBuscarUKeyTyped(evt);
+            }
+        });
+        jPanel6.add(jtfBuscarU, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 20, 150, -1));
+
+        jLabel49.setText("Buscar:");
+        jPanel6.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
 
         jtp.addTab("3", jPanel6);
 
@@ -1167,6 +1224,7 @@ public class sistema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtCompra.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jtCompra);
 
         jPanel5.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 650, 410));
@@ -1226,13 +1284,44 @@ public class sistema extends javax.swing.JFrame {
         jLabel42.setText("Total:");
         jPanel7.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 490, -1, -1));
 
-        btnBuscarVentas.setText("Buscar");
-        btnBuscarVentas.addActionListener(new java.awt.event.ActionListener() {
+        btnDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/info.png"))); // NOI18N
+        btnDetalle.setText("Detalle");
+        btnDetalle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarVentasActionPerformed(evt);
+                btnDetalleActionPerformed(evt);
             }
         });
-        jPanel7.add(btnBuscarVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 80, -1, -1));
+        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, -1, -1));
+
+        btnBuscarVentas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
+        btnBuscarVentas1.setText("Buscar");
+        btnBuscarVentas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVentas1ActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, -1, -1));
+
+        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventas", "Compras" }));
+        jcbTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbTipoItemStateChanged(evt);
+            }
+        });
+        jcbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(jcbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 160, -1));
+
+        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel43.setText("Hasta");
+        jPanel7.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
+
+        jtfTotalR.setEditable(false);
+        jtfTotalR.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel7.add(jtfTotalR, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 480, 180, -1));
 
         jtReportes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jtReportes.setModel(new javax.swing.table.DefaultTableModel(
@@ -1258,34 +1347,19 @@ public class sistema extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jtReportes.getTableHeader().setReorderingAllowed(false);
         jScrollPane6.setViewportView(jtReportes);
 
         jPanel7.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 940, 330));
-
-        jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventas", "Compras" }));
-        jcbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbTipoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(jcbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 160, -1));
-
-        jLabel43.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel43.setText("Hasta");
-        jPanel7.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, -1, -1));
-
-        jtfTotalR.setEditable(false);
-        jtfTotalR.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jPanel7.add(jtfTotalR, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 480, 180, -1));
 
         jtp.addTab("5", jPanel7);
 
         jPanel8.add(jtp, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1220, 560));
 
-        jlbSeccion1.setFont(new java.awt.Font("Gadugi", 1, 24)); // NOI18N
+        jlbSeccion1.setFont(new java.awt.Font("Cambria Math", 1, 24)); // NOI18N
         jlbSeccion1.setForeground(new java.awt.Color(51, 102, 255));
         jlbSeccion1.setText("DULCERIA MAYTA");
-        jPanel8.add(jlbSeccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 220, -1));
+        jPanel8.add(jlbSeccion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 0, 220, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/azul_back.jpg"))); // NOI18N
         jPanel8.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1190, 700));
@@ -1299,34 +1373,21 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbTipoActionPerformed
 
-    private void btnBuscarVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVentasActionPerformed
+    private void btnDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleActionPerformed
         // TODO add your handling code here:
-        String from;
-        String till;
-        String pattern  = "yyyy-MM-dd";
-        DateFormat formatter = new SimpleDateFormat(pattern);
-        from = formatter.format(jtcDesde.getDate())+" 00:00:00";
-        till = formatter.format(jtcTill.getDate())+" 23:59:59";
-        LimpiarTable();
-        if(jcbTipo.getSelectedIndex()==0){
-            try {
-                ListarVentas(from,till);
-                TotalR();
-            } catch (SQLException ex) {
-                Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try{
+        String id = jtReportes.getValueAt(jtReportes.getSelectedRow(), 0).toString();
+        String vend = jtReportes.getValueAt(jtReportes.getSelectedRow(), 1).toString();
+        String fe = jtReportes.getValueAt(jtReportes.getSelectedRow(), 2).toString();
+        String to = jtReportes.getValueAt(jtReportes.getSelectedRow(), 3).toString();
+        int tipo = jcbTipo.getSelectedIndex();
+        vista.DetalleVenta fdv = new vista.DetalleVenta(id,fe,to,vend,tipo);
+        fdv.setVisible(true);
         }
-        else{
-            try {
-                ListarCompras(from,till);
-                TotalR();
-            } catch (SQLException ex) {
-                Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, "Seleccione una venta para revisar");
         }
-
-    }//GEN-LAST:event_btnBuscarVentasActionPerformed
+    }//GEN-LAST:event_btnDetalleActionPerformed
 
     private void jtfCodigoCKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoCKeyPressed
         // TODO add your handling code her
@@ -1358,6 +1419,7 @@ public class sistema extends javax.swing.JFrame {
         ActualizarStock();
         LimpiarCompra();
         LimpiarTableC();
+        JOptionPane.showMessageDialog(null, "Se ha registrado la compra correctamente");
         }
         catch(Exception e){
         JOptionPane.showMessageDialog(null, "Ingrese Productos en la tabla compra");
@@ -1472,11 +1534,11 @@ public class sistema extends javax.swing.JFrame {
             uni.setCdunidad(jtfCodigoU.getText());
         }
         else{
-            JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como codigo de unidad");
+            JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como codigo");
             resultado =1;
         }
         if(("").equals(jtfNombreU.getText())){
-            JOptionPane.showMessageDialog(this, "Ingrese un nombre para el derivado");
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre para el producto individual");
             resultado =1;
         }
         else{
@@ -1672,11 +1734,11 @@ public class sistema extends javax.swing.JFrame {
 
         }
         else{
-            JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como codigo de derivado");
+            JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como codigo");
             resultado =1;
         }
         if(("").equals(jtfNombreD.getText())){
-            JOptionPane.showMessageDialog(this, "Ingrese un nombre para el derivado");
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre para el producto a granel");
             resultado =1;
         }
         else{
@@ -1731,7 +1793,7 @@ public class sistema extends javax.swing.JFrame {
 
         }
         else{
-            JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como codigo de derivado");
+            JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como codigo");
             resultado =1;
         }
         if(("").equals(jtfNombreD.getText())){
@@ -1923,7 +1985,7 @@ public class sistema extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Ingrese solo valores numericos como valor base");
                 resultado =1;
             }
-            if(jtfNombre.getText().isEmpty()){
+             if(jtfNombre.getText().isEmpty()){
                 JOptionPane.showMessageDialog(this, "Ingrese un nombre para el producto");
                 resultado =1;
             }
@@ -1964,6 +2026,7 @@ public class sistema extends javax.swing.JFrame {
             pro.setStock(Float.parseFloat(jtfStockP.getText()));
             pro.setPiezas(Integer.parseInt(jtfPiezasP.getText()));
         }catch(Exception e ){
+            Logger.getLogger(""+e);
         }
         if(resultado==0){
       
@@ -2051,7 +2114,7 @@ public class sistema extends javax.swing.JFrame {
         if((car<'0' || car>'9')){ 
             evt.consume();
         }
-        jtfCodigo.addKeyListener(new KeyAdapter(){
+        /*jtfCodigo.addKeyListener(new KeyAdapter(){
             @Override
             public void keyReleased(KeyEvent ke) {
                 trs.setRowFilter(RowFilter.regexFilter(jtfCodigo.getText(), 0));
@@ -2059,7 +2122,7 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         trs = new TableRowSorter(modelo);
-        jtableP.setRowSorter(trs);
+        jtableP.setRowSorter(trs);*/
     }//GEN-LAST:event_jtfCodigoKeyTyped
 
     private void jtfCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoKeyPressed
@@ -2291,6 +2354,7 @@ public class sistema extends javax.swing.JFrame {
         } catch (SQLException ex) {
             System.out.println(""+ex.toString());
         }
+        jtfCodigoU.requestFocus();
     }//GEN-LAST:event_btnUnidadesActionPerformed
 
     private void btnCombosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombosActionPerformed
@@ -2303,7 +2367,7 @@ public class sistema extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        jtfCodigoD.requestFocus();
         jtp.setSelectedIndex(2);
     }//GEN-LAST:event_btnCombosActionPerformed
 
@@ -2321,21 +2385,20 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
         vista.Administracion ventana = new vista.Administracion();
         ventana.setVisible(true);
-        this.dispose();
-        jtp.setSelectedIndex(5);
     }//GEN-LAST:event_btnAdministrarActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
         // TODO add your handling code here:
 
         jtp.setSelectedIndex(4);
-
+        jtfCodigo.requestFocus();
         LimpiarCompra();
     }//GEN-LAST:event_btnComprasActionPerformed
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
         // TODO add your handling code here:
         jtp.setSelectedIndex(0);
+        jtfCodigoPV.requestFocus();
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
@@ -2349,6 +2412,7 @@ public class sistema extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jtfCodigo.requestFocus();
     }//GEN-LAST:event_btnProductosActionPerformed
 
     private void btnLimpiarDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarDActionPerformed
@@ -2464,8 +2528,8 @@ public class sistema extends javax.swing.JFrame {
 
     private void jtfCantidadPVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCantidadPVKeyTyped
         // TODO add your handling code here:
+                char car = evt.getKeyChar();
         if(udmCaja==2){
-        char car = evt.getKeyChar();
         if((car<'0' || car>'9')){ 
             evt.consume();
         }
@@ -2574,7 +2638,7 @@ public class sistema extends javax.swing.JFrame {
     private void jtfCodigoPVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoPVKeyTyped
         // TODO add your handling code here:
            char car = evt.getKeyChar();
-        if((car<'0' || car>'9')){ 
+        if((car<'0' || car>'9') ){ 
             evt.consume();
         }
     }//GEN-LAST:event_jtfCodigoPVKeyTyped
@@ -2608,6 +2672,89 @@ public class sistema extends javax.swing.JFrame {
                jcbProductosU.requestFocus();
            }
     }//GEN-LAST:event_jtfCodigoCKeyTyped
+
+    private void jtfBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBuscarKeyTyped
+        // TODO add your handling code here:
+           jtfBuscar.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                trs.setRowFilter(RowFilter.regexFilter(jtfBuscar.getText(),1));
+        
+            }
+        });
+        trs = new TableRowSorter(modelo);
+        jtableP.setRowSorter(trs);
+    }//GEN-LAST:event_jtfBuscarKeyTyped
+
+    private void jtfBuscarGKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBuscarGKeyTyped
+        // TODO add your handling code here:
+                   jtfBuscarG.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                trs.setRowFilter(RowFilter.regexFilter(jtfBuscarG.getText(),1));
+        
+            }
+        });
+        trs = new TableRowSorter(modelo);
+        jtableD.setRowSorter(trs);
+    }//GEN-LAST:event_jtfBuscarGKeyTyped
+
+    private void jtfBuscarUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfBuscarUKeyTyped
+        // TODO add your handling code here:
+                   jtfBuscarU.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(KeyEvent ke) {
+                trs.setRowFilter(RowFilter.regexFilter(jtfBuscarU.getText(),1));
+        
+            }
+        });
+        trs = new TableRowSorter(modelo);
+        jtUnidades.setRowSorter(trs);
+    }//GEN-LAST:event_jtfBuscarUKeyTyped
+
+    private void jtfCodigoPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoPVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigoPVActionPerformed
+
+    private void btnLimpiarPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarPVActionPerformed
+        // TODO add your handling code here:
+        LimpiarVenta();
+        LimpiarTableV();
+    }//GEN-LAST:event_btnLimpiarPVActionPerformed
+
+    private void btnBuscarVentas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVentas1ActionPerformed
+        // TODO add your handling code here:
+             String from;
+        String till;
+        String pattern  = "yyyy-MM-dd";
+        DateFormat formatter = new SimpleDateFormat(pattern);
+        from = formatter.format(jtcDesde.getDate())+" 00:00:00";
+        till = formatter.format(jtcTill.getDate())+" 23:59:59";
+        LimpiarTable();
+        if(jcbTipo.getSelectedIndex()==0){
+            try {
+                ListarVentas(from,till);
+                TotalR();
+            } catch (SQLException ex) {
+                Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            try {
+                ListarCompras(from,till);
+                TotalR();
+            } catch (SQLException ex) {
+                Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_btnBuscarVentas1ActionPerformed
+
+    private void jcbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbTipoItemStateChanged
+        // TODO add your handling code here:
+        LimpiarTable();
+        btnBuscarVentas1.doClick();
+    }//GEN-LAST:event_jcbTipoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -2989,7 +3136,7 @@ public class sistema extends javax.swing.JFrame {
     private void Barras(int d,String c []){
         try{
     Document doc = new Document();
-    PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("codigos.pdf"));
+    PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("src/pdf/codigos.pdf"));
     doc.open();
 
             for (int i = 0; i < d; i++) {
@@ -3013,12 +3160,13 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarG;
     private javax.swing.JButton btnAgregarPV;
     private javax.swing.JButton btnAgregarU;
-    private javax.swing.JButton btnBuscarVentas;
+    private javax.swing.JButton btnBuscarVentas1;
     private javax.swing.JButton btnCodigoG;
     private javax.swing.JButton btnCodigoP;
     private javax.swing.JButton btnCodigoU;
     private javax.swing.JButton btnCombos;
     private javax.swing.JButton btnCompras;
+    private javax.swing.JButton btnDetalle;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEditarG;
     private javax.swing.JButton btnEditarU;
@@ -3028,6 +3176,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarU;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLimpiarD;
+    private javax.swing.JButton btnLimpiarPV;
     private javax.swing.JButton btnLimpiarU;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnReportes;
@@ -3076,6 +3225,9 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
+    private javax.swing.JLabel jLabel47;
+    private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -3117,6 +3269,9 @@ public class sistema extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jtcDesde;
     private com.toedter.calendar.JDateChooser jtcTill;
     private javax.swing.JTextField jtfBase;
+    private javax.swing.JTextField jtfBuscar;
+    private javax.swing.JTextField jtfBuscarG;
+    private javax.swing.JTextField jtfBuscarU;
     private javax.swing.JTextField jtfCantidadC;
     private javax.swing.JTextField jtfCantidadPV;
     private javax.swing.JTextField jtfCodigo;

@@ -183,4 +183,28 @@ public class VentaDB {
     }
     return ListaV;
     }
+     public ArrayList <DetalleVenta> BuscarDV(String id){
+     ArrayList<DetalleVenta> dv = new ArrayList<>();
+     String SQL = "SELECT * FROM detalleventa WHERE cdventa= ?";
+                 try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setString(1, id);
+        rs = pst.executeQuery();
+         while(rs.next()){
+        DetalleVenta der = new DetalleVenta();
+        der.setCdproducto(rs.getString("cdproducto"));
+        der.setNombre(rs.getString("nombre"));
+        der.setCantidad(rs.getFloat("cantidad"));
+        der.setPrecio(rs.getFloat("precio"));
+        der.setSubtotal(rs.getFloat("subtotal"));
+        dv.add(der);
+        }
+                 }
+                 catch(Exception e){
+                     System.out.println("detalleventa"+e);
+                 }
+     return  dv;
+     }
 }

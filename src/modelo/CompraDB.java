@@ -134,4 +134,28 @@ public class CompraDB {
     }
     return ListaC;
     }
+           public ArrayList <DetalleCompra> BuscarDC(String id){
+     ArrayList<DetalleCompra> dv = new ArrayList<>();
+     String SQL = "SELECT * FROM detallecompra WHERE cdcompra= ?";
+                 try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setString(1, id);
+        rs = pst.executeQuery();
+         while(rs.next()){
+        DetalleCompra der = new DetalleCompra();
+        der.setCdproducto(rs.getString("cdproducto"));
+        der.setNombre(rs.getString("nombre"));
+        der.setCantidad(rs.getFloat("cantidad"));
+        der.setPrecio(rs.getFloat("precio"));
+        der.setSubtotal(rs.getFloat("subtotal"));
+        dv.add(der);
+        }
+                 }
+                 catch(Exception e){
+                     System.out.println("detalleventa"+e);
+                 }
+     return  dv;
+     }
 }

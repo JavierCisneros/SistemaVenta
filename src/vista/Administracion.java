@@ -54,7 +54,8 @@ public class Administracion extends javax.swing.JFrame {
 
         jButton3.setText("jButton3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -71,13 +72,13 @@ public class Administracion extends javax.swing.JFrame {
         getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 333, -1, -1));
 
         btnMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/atras.png"))); // NOI18N
-        btnMenu.setText("Menu");
+        btnMenu.setText("Regresar");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, -1, -1));
+        getContentPane().add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 330, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Nombre:");
@@ -106,20 +107,30 @@ public class Administracion extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
       try {
             // TODO add your handling code here:
+            if(jtfName.getText().equals("") || jtfPassword.getText().equals("") ){
+            JOptionPane.showMessageDialog(null, "Ingrese el usuario y una contraseña");
+            }
+            else if(jtfName.getText().length()<5){
+            JOptionPane.showMessageDialog(null, "El nombre de usuario debe ser mayor a 5 caracteres");
+            }
+            else if(jtfPassword.getText().length()<8){
+            JOptionPane.showMessageDialog(null, "La contraseña debe ser mayor a 8 caracteres");
+            }
+            else{
            int resultado = database.agregarUsuario(jtfName.getText(),jtfPassword.getText(),jcbRol.getSelectedIndex());
             if (resultado==0) {
                 JOptionPane.showMessageDialog(this,"El usuario ha sido agregado correctamente");
+            }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this,"No se ha podido agregar el usuario"+ ex.getMessage());
         }
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
-        vista.sistema ventana = new vista.sistema();
-        ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
