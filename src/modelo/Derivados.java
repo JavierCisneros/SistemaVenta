@@ -10,9 +10,9 @@ package modelo;
  * @author yopri
  */
 public class Derivados {
-    private int cd;
+    private String cd;
     private String nombre;
-    private int cderivado;
+    private String cderivado;
     private String nderivado;
     private String detalled;
     private float precio;
@@ -21,7 +21,7 @@ public class Derivados {
     public Derivados() {
     }
 
-    public Derivados(int cd, String nombre, int cderivado, String nderivado, String detalled, float precio) {
+    public Derivados(String cd, String nombre, String cderivado, String nderivado, String detalled, float precio) {
         this.cd = cd;
         this.nombre = nombre;
         this.cderivado = cderivado;
@@ -30,11 +30,11 @@ public class Derivados {
         this.precio = precio;
     }
 
-    public int getCd() {
+    public String getCd() {
         return cd;
     }
 
-    public void setCd(int cd) {
+    public void setCd(String cd) {
         this.cd = cd;
     }
 
@@ -46,11 +46,11 @@ public class Derivados {
         this.nombre = nombre;
     }
 
-    public int getCderivado() {
+    public String getCderivado() {
         return cderivado;
     }
 
-    public void setCderivado(int cderivado) {
+    public void setCderivado(String cderivado) {
         this.cderivado = cderivado;
     }
 

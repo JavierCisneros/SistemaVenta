@@ -48,7 +48,7 @@ public class CompraDB {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, dc.getCdproducto());
+        pst.setString(1, dc.getCdproducto());
         pst.setFloat(2, dc.getCantidad());
         pst.setFloat(3, dc.getPrecio());
         pst.setFloat(4, dc.getSubtotal());
@@ -92,7 +92,7 @@ public class CompraDB {
     }
         return id;
     }
-    public boolean actualizar(float cantidad, int cod){
+    public boolean actualizar(float cantidad, String cod){
         String SQL = "UPDATE productos SET stock = ? WHERE cdproducto = ?";
         //IF NEW.piezas == 0 THEN
 //SET NEW.piezas = @derivados.piezas WHERE derivados.codigo = cdproducto
@@ -102,7 +102,7 @@ public class CompraDB {
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
         pst.setFloat(1, cantidad);
-        pst.setInt(2, cod);
+        pst.setString(2, cod);
         pst.execute();
         return true;
         } catch (SQLException ex) {

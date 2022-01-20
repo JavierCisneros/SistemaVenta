@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -110,6 +111,9 @@ public class Login extends javax.swing.JFrame {
             ventana.setVisible(true);
             this.dispose();
         }
+        else{
+        JOptionPane.showMessageDialog(null, "El usuario o contraseña son incorrectos");
+                }
     } catch (SQLException ex) {
         Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
     }

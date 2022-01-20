@@ -10,7 +10,7 @@ package modelo;
  * @author yopri
  */
 public class Productos {
-    private int cd;
+    private String cd;
     private String name;
     private String detalle;
     private int udm;
@@ -22,7 +22,7 @@ public class Productos {
     public Productos() {
     }
 
-    public Productos(int cd, String name, String detalle, int udm, float precio, float base, float stock, int piezas) {
+    public Productos(String cd, String name, String detalle, int udm, float precio, float base, float stock, int piezas) {
         this.cd = cd;
         this.name = name;
         this.detalle = detalle;
@@ -34,11 +34,11 @@ public class Productos {
     }
     
 
-    public int getCd() {
+    public String getCd() {
         return cd;
     }
 
-    public void setCd(int cd) {
+    public void setCd(String cd) {
         this.cd = cd;
     }
 

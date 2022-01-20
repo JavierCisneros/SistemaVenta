@@ -26,9 +26,9 @@ public class DerivadosDB {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, der.getCd());
+        pst.setString(1, der.getCd());
         pst.setString(2, der.getNombre());
-        pst.setInt(3, der.getCderivado());
+        pst.setString(3, der.getCderivado());
         pst.setString(4, der.getNderivado());
         pst.setString(5, der.getDetalled());
         pst.setFloat(6, der.getPrecio());
@@ -48,13 +48,13 @@ public class DerivadosDB {
     }
     }
     }
-    public boolean eliminarD(int id){
+    public boolean eliminarD(String id){
     String SQL = "DELETE FROM derivados WHERE cderivado = ?";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, id);
+        pst.setString(1, id);
         pst.execute();
         return true;
     }
@@ -78,13 +78,13 @@ public class DerivadosDB {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, der.getCd());
+        pst.setString(1, der.getCd());
         pst.setString(2, der.getNombre());
-        pst.setInt(3, der.getCderivado());
+        pst.setString(3, der.getCderivado());
         pst.setString(4, der.getNderivado());
         pst.setString(5, der.getDetalled());
         pst.setFloat(6, der.getPrecio());
-        pst.setInt(7, der.getCderivado());
+        pst.setString(7, der.getCderivado());
         pst.executeUpdate();
         return true;
     }
@@ -111,9 +111,9 @@ public class DerivadosDB {
         rs = pst.executeQuery();
         while(rs.next()){
         Derivados der = new Derivados();
-        der.setCd(rs.getInt("codigo"));
+        der.setCd(rs.getString("codigo"));
         der.setNombre(rs.getString("nombre"));
-        der.setCderivado(rs.getInt("cderivado"));
+        der.setCderivado(rs.getString("cderivado"));
         der.setNderivado(rs.getString("nderivado"));
         der.setDetalled(rs.getString("detalle"));
         der.setPrecio(rs.getFloat("precio"));

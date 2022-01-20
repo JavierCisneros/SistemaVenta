@@ -48,7 +48,7 @@ public class VentaDB {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, dv.getCdproducto());
+        pst.setString(1, dv.getCdproducto());
         pst.setFloat(2, dv.getCantidad());
         pst.setFloat(3, dv.getPrecio());
         pst.setFloat(4, dv.getSubtotal());
@@ -92,7 +92,7 @@ public class VentaDB {
     }
         return id;
     }
-    public boolean actualizar(float cantidad, int cod){
+    public boolean actualizar(float cantidad, String cod){
         String SQL = "UPDATE productos SET stock = ? WHERE cdproducto = ?";
         //IF NEW.piezas == 0 THEN
 //SET NEW.piezas = @derivados.piezas WHERE derivados.codigo = cdproducto
@@ -102,7 +102,7 @@ public class VentaDB {
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
         pst.setFloat(1, cantidad);
-        pst.setInt(2, cod);
+        pst.setString(2, cod);
         pst.execute();
         return true;
         } catch (SQLException ex) {
@@ -111,7 +111,7 @@ public class VentaDB {
         }
     
     }
-    public boolean actualizarStock(float stock, int piezas, int cd){
+    public boolean actualizarStock(float stock, int piezas, String cd){
        String SQL = "UPDATE `productos` SET `stock`= ?,`piezas`= ? WHERE `cdproducto` = ?";
     try{
         conexion = new Conexion();
@@ -119,7 +119,7 @@ public class VentaDB {
         pst = con.prepareStatement(SQL);
         pst.setFloat(1, stock);
         pst.setInt(2, piezas);
-        pst.setInt(3, cd);
+        pst.setString(3, cd);
         pst.executeUpdate();
         return true;
     }
@@ -136,14 +136,14 @@ public class VentaDB {
     }
     }
     }
-    public boolean actualizarPiezas(int piezas, int cd){
+    public boolean actualizarPiezas(int piezas, String cd){
           String SQL = "UPDATE `productos` SET `piezas`= ? WHERE `cdproducto` = ?";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
         pst.setInt(1, piezas);
-        pst.setInt(2, cd);
+        pst.setString(2, cd);
         pst.executeUpdate();
         return true;
     }

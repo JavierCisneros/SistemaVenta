@@ -10,7 +10,7 @@ package modelo;
  * @author yopri
  */
 public class DetalleVenta {
-    private int cdproducto;
+    private String cdproducto;
     private float cantidad;
     private float precio;
     private float subtotal;
@@ -19,7 +19,7 @@ public class DetalleVenta {
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int cdproducto, float cantidad, float precio, float subtotal, int cdventa) {
+    public DetalleVenta(String cdproducto, float cantidad, float precio, float subtotal, int cdventa) {
         this.cdproducto = cdproducto;
         this.cantidad = cantidad;
         this.precio = precio;
@@ -27,11 +27,11 @@ public class DetalleVenta {
         this.cdventa = cdventa;
     }
 
-    public int getCdproducto() {
+    public String getCdproducto() {
         return cdproducto;
     }
 
-    public void setCdproducto(int cdproducto) {
+    public void setCdproducto(String cdproducto) {
         this.cdproducto = cdproducto;
     }
 

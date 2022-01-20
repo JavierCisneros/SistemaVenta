@@ -10,9 +10,9 @@ package modelo;
  * @author yopri
  */
 public class Unidades {
-    private int codigo;
+    private String codigo;
     private String nombre;
-    private int cdunidad;
+    private String cdunidad;
     private String nunidad;
     private String detalleu;
     private int piezas;
@@ -21,7 +21,7 @@ public class Unidades {
     public Unidades() {
     }
 
-    public Unidades(int codigo, String nombre, int cdunidad, String nunidad, String detalleu, int piezas, float preciou) {
+    public Unidades(String codigo, String nombre, String cdunidad, String nunidad, String detalleu, int piezas, float preciou) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.cdunidad = cdunidad;
@@ -31,11 +31,11 @@ public class Unidades {
         this.preciou = preciou;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -47,11 +47,11 @@ public class Unidades {
         this.nombre = nombre;
     }
 
-    public int getCdunidad() {
+    public String getCdunidad() {
         return cdunidad;
     }
 
-    public void setCdunidad(int cdunidad) {
+    public void setCdunidad(String cdunidad) {
         this.cdunidad = cdunidad;
     }
 

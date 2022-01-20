@@ -26,9 +26,9 @@ public class UnidadesDB {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, un.getCodigo());
+        pst.setString(1, un.getCodigo());
         pst.setString(2, un.getNombre());
-        pst.setInt(3, un.getCdunidad());
+        pst.setString(3, un.getCdunidad());
         pst.setString(4, un.getNunidad());
         pst.setString(5, un.getDetalleu());
         pst.setInt(6, un.getPiezas());
@@ -49,13 +49,13 @@ public class UnidadesDB {
     }
     }
     }
-    public boolean eliminarU(int id){
+    public boolean eliminarU(String id){
     String SQL = "DELETE FROM unidades WHERE cunidad = ?";
     try{
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, id);
+        pst.setString(1, id);
         pst.execute();
         return true;
     }
@@ -79,14 +79,14 @@ public class UnidadesDB {
         conexion = new Conexion();
         con = conexion.getConnection();
         pst = con.prepareStatement(SQL);
-        pst.setInt(1, un.getCodigo());
+        pst.setString(1, un.getCodigo());
         pst.setString(2, un.getNombre());
-        pst.setInt(3, un.getCdunidad());
+        pst.setString(3, un.getCdunidad());
         pst.setString(4, un.getNunidad());
         pst.setString(5, un.getDetalleu());
         pst.setInt(6, un.getPiezas());
         pst.setFloat(7, un.getPreciou());
-        pst.setInt(8, un.getCdunidad());
+        pst.setString(8, un.getCdunidad());
         pst.executeUpdate();
         return true;
     }
@@ -113,9 +113,9 @@ public class UnidadesDB {
         rs = pst.executeQuery();
         while(rs.next()){
         Unidades uni = new Unidades();
-        uni.setCodigo(rs.getInt("codigo"));
+        uni.setCodigo(rs.getString("codigo"));
         uni.setNombre(rs.getString("nombre"));
-        uni.setCdunidad(rs.getInt("cunidad"));
+        uni.setCdunidad(rs.getString("cunidad"));
         uni.setNunidad(rs.getString("nunidad"));
         uni.setDetalleu(rs.getString("detalleu"));
         uni.setPiezas(rs.getInt("piezasu"));
