@@ -330,7 +330,7 @@ public class ProductosDB {
             
             return derivado;
     }
-      public ArrayList ConsultarDerivados(String cd){
+    public ArrayList ConsultarDerivados(String cd){
         ArrayList<Derivados> listader = new ArrayList();
       String SQL = "SELECT * FROM derivados WHERE codigo = ?";
     try{
@@ -358,7 +358,7 @@ public class ProductosDB {
     }
     return listader;
     }
-     public ArrayList ConsultarUnidades(String cd){
+    public ArrayList ConsultarUnidades(String cd){
         ArrayList<Unidades> listauni = new ArrayList();
       String SQL = "SELECT * FROM unidades WHERE codigo = ?";
     try{

@@ -53,7 +53,6 @@ import modelo.VentaDB;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
 
-
 /**
  *
  * @author yopri
@@ -111,7 +110,6 @@ public class sistema extends javax.swing.JFrame {
          btnAgregar.setEnabled(false);
          btnEditar.setEnabled(false);
          btnEliminar.setEnabled(false);
-         btnLimpiar.setEnabled(false);
          btnAgregarG.setEnabled(false);
          btnEditarG.setEnabled(false);
          btnEliminarG.setEnabled(false);
@@ -120,6 +118,7 @@ public class sistema extends javax.swing.JFrame {
          btnEliminarU.setEnabled(false);
          btnCompras.setEnabled(false);
          btnAdministrar.setEnabled(false);
+         btnReportes.setEnabled(false);
         }
       
         jtfCodigo.requestFocus();
@@ -292,6 +291,7 @@ public class sistema extends javax.swing.JFrame {
         jtfTotalR = new javax.swing.JTextField();
         jScrollPane6 = new javax.swing.JScrollPane();
         jtReportes = new javax.swing.JTable();
+        btnEliminarR = new javax.swing.JButton();
         jlbSeccion1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -1109,7 +1109,7 @@ public class sistema extends javax.swing.JFrame {
         jPanel6.add(btnEditarU, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 480, 120, -1));
 
         btnEliminarU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
-        btnEliminarU.setText("Elimiinar");
+        btnEliminarU.setText("Eliminar");
         btnEliminarU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEliminarUActionPerformed(evt);
@@ -1291,7 +1291,7 @@ public class sistema extends javax.swing.JFrame {
                 btnDetalleActionPerformed(evt);
             }
         });
-        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 70, -1, -1));
+        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
 
         btnBuscarVentas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
         btnBuscarVentas1.setText("Buscar");
@@ -1300,7 +1300,7 @@ public class sistema extends javax.swing.JFrame {
                 btnBuscarVentas1ActionPerformed(evt);
             }
         });
-        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, -1, -1));
+        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, -1, -1));
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventas", "Compras" }));
         jcbTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -1351,6 +1351,15 @@ public class sistema extends javax.swing.JFrame {
         jScrollPane6.setViewportView(jtReportes);
 
         jPanel7.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 940, 330));
+
+        btnEliminarR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/eliminar.png"))); // NOI18N
+        btnEliminarR.setText("Eliminar");
+        btnEliminarR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarRActionPerformed(evt);
+            }
+        });
+        jPanel7.add(btnEliminarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 100, -1));
 
         jtp.addTab("5", jPanel7);
 
@@ -2128,7 +2137,27 @@ public class sistema extends javax.swing.JFrame {
     private void jtfCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            jtfNombre.requestFocus();
+ 
+            pro = pdb.BuscarPro(jtfCodigo.getText());
+            if(pro.getName()!=null){
+            jtfNombre.setText(""+pro.getName());
+            jtfDetalle.setText(""+pro.getDetalle());
+            jtfPrecio.setText(""+pro.getPrecio());
+            jcbUnidad.setSelectedIndex(pro.getUdm());
+            jtfStockP.setText(""+pro.getStock());
+            jtfPiezasP.setText(""+pro.getPiezas());
+            }
+            else{
+                       jtfNombre.requestFocus();
+            }
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+              jtfNombre.setText("");
+            jtfDetalle.setText("");
+            jtfPrecio.setText("");
+            jcbUnidad.setSelectedIndex(0);
+            jtfStockP.setText("0");
+            jtfPiezasP.setText("0");
         }
     }//GEN-LAST:event_jtfCodigoKeyPressed
 
@@ -2756,6 +2785,28 @@ public class sistema extends javax.swing.JFrame {
         btnBuscarVentas1.doClick();
     }//GEN-LAST:event_jcbTipoItemStateChanged
 
+    private void btnEliminarRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarRActionPerformed
+        // TODO add your handling code here:
+        String regi;
+        String tipo;
+        tipo = jcbTipo.getSelectedItem().toString();
+        regi = jtReportes.getValueAt(jtReportes.getSelectedRow(), 0).toString();
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea eliminar el registro"+regi+"de la tabla"+tipo);
+            if (pregunta==0) {
+                if(jcbTipo.getSelectedIndex()==0){
+                vdb.eliminarV(regi);
+                JOptionPane.showMessageDialog(null, "Registro eliminado");
+                btnBuscarVentas1.doClick();
+                }
+                if(jcbTipo.getSelectedIndex()==1){
+                cdb.eliminarC(regi);
+                JOptionPane.showMessageDialog(null, "Registro eliminado");
+                btnBuscarVentas1.doClick();
+                }
+                
+            }
+    }//GEN-LAST:event_btnEliminarRActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3173,6 +3224,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarG;
     private javax.swing.JButton btnEliminarPV;
+    private javax.swing.JButton btnEliminarR;
     private javax.swing.JButton btnEliminarU;
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnLimpiarD;

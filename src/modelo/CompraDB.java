@@ -112,7 +112,7 @@ public class CompraDB {
         }
     
     }
-        public ArrayList ListarCompras(String from, String till) throws SQLException{
+    public ArrayList ListarCompras(String from, String till) throws SQLException{
     ArrayList<Compra> ListaC = new ArrayList();
     String SQL = "SELECT * FROM `compras` WHERE `fecha` BETWEEN '"+from+"' AND '"+till+"'";
     try{
@@ -134,7 +134,7 @@ public class CompraDB {
     }
     return ListaC;
     }
-           public ArrayList <DetalleCompra> BuscarDC(String id){
+    public ArrayList <DetalleCompra> BuscarDC(String id){
      ArrayList<DetalleCompra> dv = new ArrayList<>();
      String SQL = "SELECT * FROM detallecompra WHERE cdcompra= ?";
                  try{
@@ -158,4 +158,28 @@ public class CompraDB {
                  }
      return  dv;
      }
+    public boolean eliminarC(String id){
+    String SQL = "DELETE FROM compras WHERE cdcompra = ?";
+    try{
+        conexion = new Conexion();
+        con = conexion.getConnection();
+        pst = con.prepareStatement(SQL);
+        pst.setString(1, id);
+        pst.execute();
+        return true;
+    }
+    catch(SQLException e){
+    
+        System.out.println(""+ e.toString());
+        return false;
+    }
+    finally{
+    try{
+        con.close();
+    }
+    catch(SQLException e){
+        System.out.println(""+e.toString());
+    }
+    }
+    }
 }
