@@ -11,13 +11,14 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.Barcode128;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.HeadlessException;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -1291,7 +1293,7 @@ public class sistema extends javax.swing.JFrame {
                 btnDetalleActionPerformed(evt);
             }
         });
-        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 480, -1, -1));
+        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, 140, -1));
 
         btnBuscarVentas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
         btnBuscarVentas1.setText("Buscar");
@@ -1300,7 +1302,7 @@ public class sistema extends javax.swing.JFrame {
                 btnBuscarVentas1ActionPerformed(evt);
             }
         });
-        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, -1, -1));
+        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 140, -1));
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventas", "Compras" }));
         jcbTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -1359,7 +1361,7 @@ public class sistema extends javax.swing.JFrame {
                 btnEliminarRActionPerformed(evt);
             }
         });
-        jPanel7.add(btnEliminarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 480, 100, -1));
+        jPanel7.add(btnEliminarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 140, -1));
 
         jtp.addTab("5", jPanel7);
 
@@ -1430,7 +1432,7 @@ public class sistema extends javax.swing.JFrame {
         LimpiarTableC();
         JOptionPane.showMessageDialog(null, "Se ha registrado la compra correctamente");
         }
-        catch(Exception e){
+        catch(HeadlessException e){
         JOptionPane.showMessageDialog(null, "Ingrese Productos en la tabla compra");
         }
     }//GEN-LAST:event_bntRegCActionPerformed
@@ -1822,8 +1824,8 @@ public class sistema extends javax.swing.JFrame {
             resultado =1;
         }
         der.setDetalled(jtfDetalleD.getText());
-    }catch(Exception e){
-            System.out.println(""+e);
+    }catch(HeadlessException | NumberFormatException e){
+            Logger.getLogger(""+e);
 }
         if(resultado==0){
               if(pdb.BuscarPro(der.getCderivado()).getCd()!=null || pdb.BuscarUni(der.getCderivado()).getCdunidad()!=null){
@@ -1886,7 +1888,7 @@ public class sistema extends javax.swing.JFrame {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         // TODO add your handling code here:
         int resultado=0;
-        float base;
+        float r;
         String cdproducto;
         String nombre;
         String detalle;
@@ -1897,8 +1899,8 @@ public class sistema extends javax.swing.JFrame {
         if(jtableP.getSelectedRowCount()!=0){
         if(Numeros(jtfBase.getText())){
             if(Numeros(jtfBase.getText()) && Float.parseFloat(jtfBase.getText())<=1 && Float.parseFloat(jtfBase.getText())>0){
-                base = Float.parseFloat(jtfBase.getText());
-                pro.setBase(base);
+                r = Float.parseFloat(jtfBase.getText());
+                pro.setBase(r);
             }
             else{
                 JOptionPane.showMessageDialog(this, "Ingrese solo valores en el rango 0.1Kg - 1Kg");
@@ -1973,7 +1975,7 @@ public class sistema extends javax.swing.JFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         int resultado=0;
-        float base;
+        float r;
         String cdproducto;
         String nombre;
         String detalle;
@@ -1982,8 +1984,8 @@ public class sistema extends javax.swing.JFrame {
         try{
             if(Numeros(jtfBase.getText())){
                 if(Numeros(jtfBase.getText()) && Float.parseFloat(jtfBase.getText())<=1 && Float.parseFloat(jtfBase.getText())>0){
-                    base = Float.parseFloat(jtfBase.getText());
-                    pro.setBase(base);
+                    r = Float.parseFloat(jtfBase.getText());
+                    pro.setBase(r);
                 }
                 else{
                     JOptionPane.showMessageDialog(this, "Ingrese solo valores en el rango 0.1Kg - 1Kg");
@@ -2034,7 +2036,7 @@ public class sistema extends javax.swing.JFrame {
             pro.setDetalle(detalle);
             pro.setStock(Float.parseFloat(jtfStockP.getText()));
             pro.setPiezas(Integer.parseInt(jtfPiezasP.getText()));
-        }catch(Exception e ){
+        }catch(HeadlessException | NumberFormatException e ){
             Logger.getLogger(""+e);
         }
         if(resultado==0){
@@ -2230,7 +2232,7 @@ public class sistema extends javax.swing.JFrame {
         tmv.removeRow(jtVenta.getSelectedRow());
         JOptionPane.showMessageDialog(null, "Producto eliminado");
         }
-        catch(Exception e ){
+        catch(HeadlessException e ){
         Logger.getLogger(""+e);
          JOptionPane.showMessageDialog(null, "Seleccione un producto a eliminar");
         }
@@ -2281,7 +2283,7 @@ public class sistema extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingresa la cantidad");
         }
         }
-        catch(Exception e){
+        catch(HeadlessException | NumberFormatException e){
         JOptionPane.showMessageDialog(null, "Error al agregar producto");
         }
     }//GEN-LAST:event_btnAgregarPVActionPerformed
@@ -2312,22 +2314,25 @@ public class sistema extends javax.swing.JFrame {
                     jtfPrecioPV.setText(""+pro.getPrecio());
                     jtfCantidadPV.requestFocus();
                     //Carga de combobox
-
+                    
                     jcbOpciones.addItem(""+pro.getName());
                     if (pro.getUdm()==2) {
                         for (int i = 1; i < u.size(); i++) {
                             jcbOpciones.addItem(""+u.get(i).getNunidad());
-                            udmCaja = 2;
-                            jtfCantidadPV.setText("1");
+                 
+                            
                         }
+                                   udmCaja = 2;
+                            jtfCantidadPV.setText("1");
                     }
                     if (pro.getUdm()==1) {
 
                         for (int i = 1; i < d.size(); i++) {
                             jcbOpciones.addItem(""+d.get(i).getNderivado());
-                            udmCaja = 1;
+                           
                         
                         }
+                         udmCaja = 1;
                     }
 
                 }
@@ -2459,30 +2464,30 @@ public class sistema extends javax.swing.JFrame {
 
         if(jtableP.getSelectedRowCount()==0){
         try{
-         String d [] = new String[jtableP.getRowCount()];
+         String filastabla [] = new String[jtableP.getRowCount()];
             for (int i = 0; i < jtableP.getRowCount(); i++) {
-                d[i] = jtableP.getValueAt(i, 0).toString();
+                filastabla[i] = jtableP.getValueAt(i, 0).toString();
             }
-        Barras(jtableP.getRowCount(),d);
+        Barras(jtableP.getRowCount(),filastabla);
               JOptionPane.showMessageDialog(null, "Se ha creado el archivo con exito de todos los codigos");
         }
-        catch(Exception e){
-            System.out.println("Codigos P"+e);
+        catch(HeadlessException e){
+            Logger.getLogger(""+e);
         }
         }
         else{
               try{
-         int d  = jtableP.getSelectedRowCount();
-         int c [] = jtableP.getSelectedRows();
-         String e [] = new String[d];
-          for (int i = 0; i < d; i++) {
-                e[i] = jtableP.getValueAt(c[i], 0).toString();
+         int numerofilas  = jtableP.getSelectedRowCount();
+         int filas [] = jtableP.getSelectedRows();
+         String e [] = new String[numerofilas];
+          for (int i = 0; i < numerofilas; i++) {
+                e[i] = jtableP.getValueAt(filas[i], 0).toString();
             }
-        Barras(d,e);
+        Barras(numerofilas,e);
         JOptionPane.showMessageDialog(null, "Se ha creado el archivo con exito de los codigos seleccionados");
         }
-        catch(Exception e){
-            System.out.println("COdigos P"+e);
+        catch(HeadlessException e){
+            Logger.getLogger(""+e);
         }
             
         }
@@ -2493,30 +2498,30 @@ public class sistema extends javax.swing.JFrame {
         
         if(jtableD.getSelectedRowCount()==0){
         try{
-         String d [] = new String[jtableD.getRowCount()];
+         String filas [] = new String[jtableD.getRowCount()];
             for (int i = 0; i < jtableD.getRowCount(); i++) {
-                d[i] = jtableD.getValueAt(i, 0).toString();
+                filas[i] = jtableD.getValueAt(i, 0).toString();
             }
-        Barras(jtableD.getRowCount(),d);
+        Barras(jtableD.getRowCount(),filas);
         JOptionPane.showMessageDialog(null, "Se ha creado el archivo con exito de todos los codigos");
         }
-        catch(Exception e){
-            System.out.println("Codigos G"+e);
+        catch(HeadlessException e){
+            Logger.getLogger(""+e);
         }
         }
         else{
               try{
-         int d  = jtableD.getSelectedRowCount();
-         int c [] = jtableD.getSelectedRows();
-         String e [] = new String[d];
-          for (int i = 0; i < d; i++) {
-                e[i] = jtableD.getValueAt(c[i], 0).toString();
+         int filase  = jtableD.getSelectedRowCount();
+         int filas [] = jtableD.getSelectedRows();
+         String e [] = new String[filase];
+          for (int i = 0; i < filase; i++) {
+                e[i] = jtableD.getValueAt(filas[i], 0).toString();
             }
-        Barras(d,e);
+        Barras(filase,e);
               JOptionPane.showMessageDialog(null, "Se ha creado el archivo con exito de los codigos seleccionados");
         }
-        catch(Exception e){
-            System.out.println("Codigos G"+e);
+        catch(HeadlessException e){
+           Logger.getLogger(""+e);
         }
             
         }
@@ -2526,30 +2531,30 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
              if(jtUnidades.getSelectedRowCount()==0){
         try{
-         String d [] = new String[jtUnidades.getRowCount()];
+         String filase [] = new String[jtUnidades.getRowCount()];
             for (int i = 0; i < jtUnidades.getRowCount(); i++) {
-                d[i] = jtUnidades.getValueAt(i, 0).toString();
+                filase[i] = jtUnidades.getValueAt(i, 0).toString();
             }
-        Barras(jtUnidades.getRowCount(),d);
+        Barras(jtUnidades.getRowCount(),filase);
               JOptionPane.showMessageDialog(null, "Se ha creado el archivo con exito de todos los codigos");
         }
-        catch(Exception e){
-            System.out.println("Codigos U"+e);
+        catch(HeadlessException e){
+            Logger.getLogger(""+e);
         }
         }
         else{
               try{
-         int d  = jtUnidades.getSelectedRowCount();
-         int c [] = jtUnidades.getSelectedRows();
-         String e [] = new String[d];
-          for (int i = 0; i < d; i++) {
-                e[i] = jtUnidades.getValueAt(c[i], 0).toString();
+         int numerofilas  = jtUnidades.getSelectedRowCount();
+         int filas [] = jtUnidades.getSelectedRows();
+         String e [] = new String[numerofilas];
+          for (int i = 0; i < numerofilas; i++) {
+                e[i] = jtUnidades.getValueAt(filas[i], 0).toString();
             }
-        Barras(d,e);
+        Barras(numerofilas,e);
         JOptionPane.showMessageDialog(null, "Se ha creado el archivo con exito de los codigos seleccionados");
         }
-        catch(Exception e){
-            System.out.println("Codigos "+e);
+        catch(HeadlessException e){
+            Logger.getLogger(""+e);
         }
             
         }
@@ -2823,22 +2828,13 @@ public class sistema extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(sistema.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new sistema().setVisible(true);
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new sistema().setVisible(true);
         });
     }
     private static String rol(){
@@ -2855,7 +2851,7 @@ public class sistema extends javax.swing.JFrame {
     try {
     float num = Float.parseFloat(base);
     return true;
-    }    catch(Exception e){
+    }    catch(NumberFormatException e){
     return false;
     }    
     }
@@ -3101,6 +3097,7 @@ public class sistema extends javax.swing.JFrame {
             pro = pdb.BuscarPro(cod);
             float actual = pro.getStock()+cant;
             cdb.actualizar(actual, cod);
+            System.out.println("se actualizo con"+actual);
         }
     }
       private void ActualizarStockV(){
@@ -3116,19 +3113,19 @@ public class sistema extends javax.swing.JFrame {
             cdder = der.getCd();
             cduni = uni.getCodigo();
             cdpro = pro.getCd();
-            if(cdpro == null){
+            if(cdpro != null){
             float actual = pro.getStock()-cant;
             vdb.actualizar(actual, cdpro);
             }
-            else if(cdder == null){
+            else if(cdder != null){
             pro = pdb.BuscarPro(cdder);
             float actual = pro.getStock()-cant;
             vdb.actualizar(actual, cdder);
             }
-            else if(cduni == null){
+            else if(cduni != null){
             pro = pdb.BuscarPro(cduni);
-            int c = Integer.parseInt(""+Math.round(cant));
-            int actual = Integer.parseInt(""+(pro.getPiezas()-c));
+            int cdp = Integer.parseInt(""+Math.round(cant));
+            int actual = Integer.parseInt(""+(pro.getPiezas()-cdp));
             //vdb.actualizar(actual, cduni); //Actualizar piezas
             vdb.actualizarPiezas(actual, cduni);
             //Actualizacion de piezas y stock para unidades
@@ -3139,6 +3136,7 @@ public class sistema extends javax.swing.JFrame {
             int suma = piezas+exi;
             float resta = stock - 1;
             vdb.actualizarStock(resta, suma, cduni);
+                System.out.println("se Actulizo con "+resta+" "+suma+" "+cduni);
             }
             
             }
@@ -3187,9 +3185,11 @@ public class sistema extends javax.swing.JFrame {
     private void Barras(int d,String c []){
         try{
     Document doc = new Document();
-    PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream("src/pdf/codigos.pdf"));
+    String uniqueID = UUID.randomUUID().toString();
+     String ruta = System.getProperty("user.home")+File.separator+"Desktop";
+    PdfWriter pdf = PdfWriter.getInstance(doc, new FileOutputStream(ruta+File.separator+"Codigos"+uniqueID+".pdf"));
     doc.open();
-
+   
             for (int i = 0; i < d; i++) {
                     Barcode128 code = new Barcode128();
                  code.setCode(c[i]);   
