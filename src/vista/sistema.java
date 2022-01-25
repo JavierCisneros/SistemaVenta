@@ -601,6 +601,11 @@ public class sistema extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
 
         jtfDetalle.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtfDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfDetalleActionPerformed(evt);
+            }
+        });
         jtfDetalle.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfDetalleKeyPressed(evt);
@@ -751,9 +756,17 @@ public class sistema extends javax.swing.JFrame {
         jPanel2.add(jtfStockP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 200, -1));
 
         jtfPiezasP.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jtfPiezasP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfPiezasPActionPerformed(evt);
+            }
+        });
         jtfPiezasP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfPiezasPKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfPiezasPKeyTyped(evt);
             }
         });
         jPanel2.add(jtfPiezasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 200, -1));
@@ -821,6 +834,11 @@ public class sistema extends javax.swing.JFrame {
         });
         jPanel4.add(jtfDetalleD, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 210, -1));
 
+        jtfCodigoD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfCodigoDActionPerformed(evt);
+            }
+        });
         jtfCodigoD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfCodigoDKeyPressed(evt);
@@ -1054,6 +1072,9 @@ public class sistema extends javax.swing.JFrame {
         jtfPiezasU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jtfPiezasUKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfPiezasUKeyTyped(evt);
             }
         });
         jPanel6.add(jtfPiezasU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 200, -1));
@@ -1293,7 +1314,7 @@ public class sistema extends javax.swing.JFrame {
                 btnDetalleActionPerformed(evt);
             }
         });
-        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, 140, -1));
+        jPanel7.add(btnDetalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 480, 150, -1));
 
         btnBuscarVentas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/buscar.png"))); // NOI18N
         btnBuscarVentas1.setText("Buscar");
@@ -1302,7 +1323,7 @@ public class sistema extends javax.swing.JFrame {
                 btnBuscarVentas1ActionPerformed(evt);
             }
         });
-        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 140, -1));
+        jPanel7.add(btnBuscarVentas1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 150, -1));
 
         jcbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ventas", "Compras" }));
         jcbTipo.addItemListener(new java.awt.event.ItemListener() {
@@ -1361,7 +1382,7 @@ public class sistema extends javax.swing.JFrame {
                 btnEliminarRActionPerformed(evt);
             }
         });
-        jPanel7.add(btnEliminarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 140, -1));
+        jPanel7.add(btnEliminarR, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 480, 150, -1));
 
         jtp.addTab("5", jPanel7);
 
@@ -1619,7 +1640,7 @@ public class sistema extends javax.swing.JFrame {
             resultado =1;
         }
         else{
-            uni.setNunidad(jtfNombreU.getText());
+            uni.setNunidad(jtfNombreU.getText()+" G");
         }
         if(Numeros(jtfPrecioU.getText())){
             if(!jtfPrecioU.getText().equals("")){
@@ -1672,7 +1693,9 @@ public class sistema extends javax.swing.JFrame {
         jtfPiezasU.setText(jtUnidades.getValueAt(fila, 3).toString());
         jtfPrecioU.setText(jtUnidades.getValueAt(fila, 4).toString());
         jcbProductosU.setSelectedItem(jtUnidades.getValueAt(fila, 6).toString());
-        
+            if(jtUnidades.getSelectedRowCount()>1){
+                LimpiarUnidades();
+        }
     }//GEN-LAST:event_jtUnidadesMouseClicked
 
     private void jtfDetalleUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDetalleUActionPerformed
@@ -1704,7 +1727,9 @@ public class sistema extends javax.swing.JFrame {
         jtfDetalleD.setText(jtableD.getValueAt(fila, 2).toString());
         jtfPrecioD.setText(jtableD.getValueAt(fila,3).toString());
         jcbProductos.setSelectedItem(jtableD.getValueAt(fila,5).toString());
- 
+        if (jtableD.getSelectedRowCount()>1) {
+            LimpiarDerivados();
+        }
     }//GEN-LAST:event_jtableDMouseClicked
 
     private void btnEliminarGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarGActionPerformed
@@ -1812,7 +1837,7 @@ public class sistema extends javax.swing.JFrame {
             resultado =1;
         }
         else{
-            der.setNderivado(jtfNombreD.getText());
+            der.setNderivado(jtfNombreD.getText()+" U");
         }
         if(Numeros(jtfPrecioD.getText())){
             if(!jtfPrecioD.getText().equals("")){
@@ -1843,7 +1868,7 @@ public class sistema extends javax.swing.JFrame {
                 }
             }
             else{
-                JOptionPane.showMessageDialog(this, "No existe este producto");
+                JOptionPane.showMessageDialog(this, "Este producto ya esta registrado");
             }
               }
         }
@@ -1864,6 +1889,9 @@ public class sistema extends javax.swing.JFrame {
         jtfPrecio.setText(jtableP.getValueAt(fila, 4).toString());
         jtfStockP.setText(jtableP.getValueAt(fila, 5).toString());
         jtfPiezasP.setText(jtableP.getValueAt(fila, 6).toString());
+            if(jtableP.getSelectedRowCount()>1){
+                LimpiarProductos();
+        }
     }//GEN-LAST:event_jtablePMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -1872,8 +1900,11 @@ public class sistema extends javax.swing.JFrame {
             int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea eliminar este producto?");
             if (pregunta==0) {
                 String id = jtfCodigo.getText();
-                pdb.eliminarP(id);
+                
+                if(pdb.eliminarP(id)){
+                
                 JOptionPane.showMessageDialog(null, "Producto eliminado");
+                }
                 LimpiarTable();
                 LimpiarProductos();
                 try {
@@ -1883,6 +1914,7 @@ public class sistema extends javax.swing.JFrame {
                 }
             }
         }
+    
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -1896,7 +1928,6 @@ public class sistema extends javax.swing.JFrame {
         float precio;
         int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea editar este producto?");
             if (pregunta==0) {
-        if(jtableP.getSelectedRowCount()!=0){
         if(Numeros(jtfBase.getText())){
             if(Numeros(jtfBase.getText()) && Float.parseFloat(jtfBase.getText())<=1 && Float.parseFloat(jtfBase.getText())>0){
                 r = Float.parseFloat(jtfBase.getText());
@@ -1967,7 +1998,7 @@ public class sistema extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Este producto ya esta registrado");
             }
         }
-        }
+        
             }
     
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -2092,12 +2123,24 @@ public class sistema extends javax.swing.JFrame {
             jcbUnidad.requestFocus();
             
         }
+                   if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            jcbUnidad.requestFocus();
+        }
+                      if(evt.getKeyCode()==KeyEvent.VK_UP){
+            jtfDetalle.requestFocus();
+        }
     }//GEN-LAST:event_jtfPrecioKeyPressed
 
     private void jcbUnidadKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcbUnidadKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             jtfStockP.requestFocus();
+        }
+                   if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            jtfStockP.requestFocus();
+        }
+                      if(evt.getKeyCode()==KeyEvent.VK_UP){
+            jtfPrecio.requestFocus();
         }
     }//GEN-LAST:event_jcbUnidadKeyPressed
 
@@ -2110,12 +2153,25 @@ public class sistema extends javax.swing.JFrame {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             jtfPrecio.requestFocus();
         }
+                   if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            jtfPrecio.requestFocus();
+        }
+                      if(evt.getKeyCode()==KeyEvent.VK_UP){
+            jtfNombre.requestFocus();
+        }
     }//GEN-LAST:event_jtfDetalleKeyPressed
 
     private void jtfNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             jtfDetalle.requestFocus();
+        }
+           if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            jtfDetalle.requestFocus();
+        }
+                      if(evt.getKeyCode()==KeyEvent.VK_UP){
+            
+            jtfCodigo.requestFocus();
         }
     }//GEN-LAST:event_jtfNombreKeyPressed
 
@@ -2161,6 +2217,9 @@ public class sistema extends javax.swing.JFrame {
             jtfStockP.setText("0");
             jtfPiezasP.setText("0");
         }
+        if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+          jtfNombre.requestFocus();
+        }
     }//GEN-LAST:event_jtfCodigoKeyPressed
 
     private void jtfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoActionPerformed
@@ -2199,6 +2258,7 @@ public class sistema extends javax.swing.JFrame {
 
     private void btnVenderPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderPVActionPerformed
         // TODO add your handling code here:
+        try{
         if(jtVenta.getRowCount()!=0){
                int pregunta = JOptionPane.showConfirmDialog(null, "Imprimir Ticket");
             if (pregunta==0) {
@@ -2222,6 +2282,10 @@ public class sistema extends javax.swing.JFrame {
         }
         else{
         JOptionPane.showMessageDialog(null, "Ingrese productos a la tabla para vender");
+        }
+        }
+        catch(Exception e){
+        Logger.getLogger(""+e);
         }
     }//GEN-LAST:event_btnVenderPVActionPerformed
 
@@ -2294,6 +2358,10 @@ public class sistema extends javax.swing.JFrame {
 
             btnAgregarPV.doClick();
         }
+           if (evt.getKeyCode() == KeyEvent.VK_UP) {
+
+            jtfCodigoPV.requestFocus();
+        }
     }//GEN-LAST:event_jtfCantidadPVKeyPressed
 
     private void jtfCantidadPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCantidadPVActionPerformed
@@ -2314,7 +2382,7 @@ public class sistema extends javax.swing.JFrame {
                     jtfPrecioPV.setText(""+pro.getPrecio());
                     jtfCantidadPV.requestFocus();
                     //Carga de combobox
-                    
+                    jcbOpciones.removeAllItems();
                     jcbOpciones.addItem(""+pro.getName());
                     if (pro.getUdm()==2) {
                         for (int i = 1; i < u.size(); i++) {
@@ -2326,7 +2394,7 @@ public class sistema extends javax.swing.JFrame {
                             jtfCantidadPV.setText("1");
                     }
                     if (pro.getUdm()==1) {
-
+                      
                         for (int i = 1; i < d.size(); i++) {
                             jcbOpciones.addItem(""+d.get(i).getNderivado());
                            
@@ -2337,7 +2405,7 @@ public class sistema extends javax.swing.JFrame {
 
                 }
                 else if (der.getNderivado() != null) {
-
+                    jcbOpciones.removeAllItems();
                     jcbOpciones.addItem(""+der.getNderivado());
                     jtfCantidadPV.requestFocus();
                     jtfPrecioPV.setText(""+der.getPrecio());
@@ -2345,8 +2413,7 @@ public class sistema extends javax.swing.JFrame {
                     udmCaja = 1;
                 }
                 else if (uni.getNunidad() != null) {
-
-                    System.out.println("Precio"+uni.getPreciou());
+                    jcbOpciones.removeAllItems();
                     jtfCantidadPV.requestFocus();
                     jcbOpciones.addItem(""+uni.getNunidad());
                     jtfPrecioPV.setText(""+uni.getPreciou());
@@ -2367,6 +2434,7 @@ public class sistema extends javax.swing.JFrame {
         }
         if(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE){
             LimpiarVenta();
+            jtfCodigoPV.requestFocus();
         }
     }//GEN-LAST:event_jtfCodigoPVKeyPressed
 
@@ -2379,8 +2447,8 @@ public class sistema extends javax.swing.JFrame {
 
     private void btnUnidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUnidadesActionPerformed
         // TODO add your handling code here:
-        cajas();
         jtp.setSelectedIndex(3);
+        cajas();
         LimpiarTable();
         LimpiarUnidades();
         try {
@@ -2392,6 +2460,7 @@ public class sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUnidadesActionPerformed
 
     private void btnCombosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCombosActionPerformed
+        jtp.setSelectedIndex(2);
         cajas();
         LimpiarDerivados();
         LimpiarTable();
@@ -2402,7 +2471,6 @@ public class sistema extends javax.swing.JFrame {
             Logger.getLogger(sistema.class.getName()).log(Level.SEVERE, null, ex);
         }
         jtfCodigoD.requestFocus();
-        jtp.setSelectedIndex(2);
     }//GEN-LAST:event_btnCombosActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
@@ -2425,7 +2493,7 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         jtp.setSelectedIndex(4);
-        jtfCodigo.requestFocus();
+        jtfCodigoC.requestFocus();
         LimpiarCompra();
     }//GEN-LAST:event_btnComprasActionPerformed
 
@@ -2576,8 +2644,23 @@ public class sistema extends javax.swing.JFrame {
     private void jtfStockPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfStockPKeyPressed
         // TODO add your handling code here:
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-           jtfPiezasP.requestFocus();
+               int udmc = jcbUnidad.getSelectedIndex();
+                    if(udmc==1){
+           btnAgregar.doClick();
+                      
            }
+                    else if(udmc==2){
+                 jtfPiezasP.requestFocus();
+                                       if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+            jtfPiezasP.requestFocus();
+        }
+           }
+           }
+                                 if(evt.getKeyCode()==KeyEvent.VK_UP){
+            jcbUnidad.requestFocus();
+        }
+
+      
     }//GEN-LAST:event_jtfStockPKeyPressed
 
     private void jtfPiezasPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPiezasPKeyPressed
@@ -2586,11 +2669,16 @@ public class sistema extends javax.swing.JFrame {
                btnAgregar.doClick();
                
            }
+                                 if(evt.getKeyCode()==KeyEvent.VK_UP){
+            jtfStockP.requestFocus();
+        }
     }//GEN-LAST:event_jtfPiezasPKeyPressed
 
     private void jcbProductosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcbProductosKeyPressed
         // TODO add your handling code here:
-     
+           if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfPrecioD.requestFocus();
+           }
     }//GEN-LAST:event_jcbProductosKeyPressed
 
     private void jtfCodigoDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoDKeyReleased
@@ -2599,15 +2687,40 @@ public class sistema extends javax.swing.JFrame {
 
     private void jtfCodigoDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoDKeyPressed
         // TODO add your handling code here:
-           if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-               jtfNombreD.requestFocus();
-           }
+         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+ 
+            der = pdb.BuscarDer(jtfCodigoD.getText());
+            if(der.getNderivado()!=null){
+            jtfNombreD.setText(""+der.getNderivado());
+            jtfDetalleD.setText(""+der.getDetalled());
+            jtfPrecioD.setText(""+der.getPrecio());
+            jcbProductos.setSelectedItem(""+der.getNombre());
+            }
+            else{
+                       jtfNombreD.requestFocus();
+            }
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+              jtfNombreD.setText("");
+            jtfDetalleD.setText("");
+            jtfPrecioD.setText("");
+            jcbProductos.setSelectedIndex(0);
+        }
+         if(evt.getKeyCode()==KeyEvent.VK_DOWN){
+             jtfNombreD.requestFocus();
+        }
     }//GEN-LAST:event_jtfCodigoDKeyPressed
 
     private void jtfNombreDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNombreDKeyPressed
         // TODO add your handling code here:
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jtfDetalleD.requestFocus();
+           }
+            if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfCodigoD.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jtfDetalleD.requestFocus();
            }
     }//GEN-LAST:event_jtfNombreDKeyPressed
 
@@ -2616,12 +2729,24 @@ public class sistema extends javax.swing.JFrame {
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jtfPrecioD.requestFocus();
            }
+                 if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfNombreD.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jtfPrecioD.requestFocus();
+           }
     }//GEN-LAST:event_jtfDetalleDKeyPressed
 
     private void jtfPrecioDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioDKeyPressed
         // TODO add your handling code here:
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jcbProductos.requestFocus();
+           }
+                 if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfDetalleD.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jcbProductos.requestFocus();
            }
     }//GEN-LAST:event_jtfPrecioDKeyPressed
 
@@ -2635,12 +2760,24 @@ public class sistema extends javax.swing.JFrame {
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jtfDetalleU.requestFocus();
            }
+                 if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfCodigoU.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jtfDetalleU.requestFocus();
+           }
     }//GEN-LAST:event_jtfNombreUKeyPressed
 
     private void jtfDetalleUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDetalleUKeyPressed
         // TODO add your handling code here:
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jtfPiezasU.requestFocus();
+           }
+                 if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfNombreU.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jtfPiezasU.requestFocus();
            }
     }//GEN-LAST:event_jtfDetalleUKeyPressed
 
@@ -2649,12 +2786,24 @@ public class sistema extends javax.swing.JFrame {
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jtfPrecioU.requestFocus();
            }
+                 if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfDetalleU.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jtfPrecioU.requestFocus();
+           }
     }//GEN-LAST:event_jtfPiezasUKeyPressed
 
     private void jtfPrecioUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioUKeyPressed
         // TODO add your handling code here:
            if(evt.getKeyCode() == KeyEvent.VK_ENTER){
                jcbProductosU.requestFocus();
+           }
+                 if(evt.getKeyCode() == KeyEvent.VK_UP){
+               jtfPiezasU.requestFocus();
+           }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jcbProductosU.requestFocus();
            }
     }//GEN-LAST:event_jtfPrecioUKeyPressed
 
@@ -2687,8 +2836,29 @@ public class sistema extends javax.swing.JFrame {
 
     private void jtfCodigoUKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoUKeyPressed
         // TODO add your handling code here:
-         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
-               jtfNombreU.requestFocus();
+            if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+ 
+            uni = pdb.BuscarUni(jtfCodigoU.getText());
+            if(uni.getNunidad()!=null){
+            jtfNombreU.setText(""+uni.getNunidad());
+            jtfDetalleU.setText(""+uni.getDetalleu());
+            jtfPrecioU.setText(""+uni.getPreciou());
+            jtfPiezasU.setText(""+uni.getPiezas());
+            jcbProductosU.setSelectedItem(""+uni.getNombre());
+            }
+            else{
+                       jtfNombreU.requestFocus();
+            }
+        }
+        if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE){
+              jtfNombreU.setText("");
+            jtfDetalleU.setText("");
+            jtfPrecioU.setText("");
+            jtfPiezasU.setText("");
+            jcbProductosU.setSelectedIndex(0);
+        }
+             if(evt.getKeyCode() == KeyEvent.VK_DOWN){
+                 jtfNombreU.requestFocus();
            }
     }//GEN-LAST:event_jtfCodigoUKeyPressed
 
@@ -2796,7 +2966,7 @@ public class sistema extends javax.swing.JFrame {
         String tipo;
         tipo = jcbTipo.getSelectedItem().toString();
         regi = jtReportes.getValueAt(jtReportes.getSelectedRow(), 0).toString();
-            int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea eliminar el registro"+regi+"de la tabla"+tipo);
+            int pregunta = JOptionPane.showConfirmDialog(null, "¿Estas seguro que desea eliminar el registro "+regi+" de la tabla "+tipo);
             if (pregunta==0) {
                 if(jcbTipo.getSelectedIndex()==0){
                 vdb.eliminarV(regi);
@@ -2811,6 +2981,34 @@ public class sistema extends javax.swing.JFrame {
                 
             }
     }//GEN-LAST:event_btnEliminarRActionPerformed
+
+    private void jtfCodigoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodigoDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfCodigoDActionPerformed
+
+    private void jtfPiezasUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPiezasUKeyTyped
+        // TODO add your handling code here:
+              char car = evt.getKeyChar();
+        if((car<'0' || car>'9')){ 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfPiezasUKeyTyped
+
+    private void jtfPiezasPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPiezasPKeyTyped
+        // TODO add your handling code here:
+              char car = evt.getKeyChar();
+        if((car<'0' || car>'9')){ 
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtfPiezasPKeyTyped
+
+    private void jtfDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDetalleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfDetalleActionPerformed
+
+    private void jtfPiezasPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPiezasPActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtfPiezasPActionPerformed
 
     /**
      * @param args the command line arguments

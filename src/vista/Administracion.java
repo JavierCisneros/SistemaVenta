@@ -49,8 +49,8 @@ public class Administracion extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jtfName = new javax.swing.JTextField();
-        jtfPassword = new javax.swing.JTextField();
         jcbRol = new javax.swing.JComboBox<>();
+        jtfPassword = new javax.swing.JPasswordField();
 
         jButton3.setText("jButton3");
 
@@ -94,12 +94,10 @@ public class Administracion extends javax.swing.JFrame {
         jtfName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         getContentPane().add(jtfName, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 110, 331, -1));
 
-        jtfPassword.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        getContentPane().add(jtfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 177, 331, -1));
-
         jcbRol.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jcbRol.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Empleado", "Administrador" }));
         getContentPane().add(jcbRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 247, 331, -1));
+        getContentPane().add(jtfPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 330, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -179,6 +177,6 @@ public class Administracion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JComboBox<String> jcbRol;
     private javax.swing.JTextField jtfName;
-    private javax.swing.JTextField jtfPassword;
+    private javax.swing.JPasswordField jtfPassword;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -59,7 +60,7 @@ public class DerivadosDB {
         return true;
     }
     catch(SQLException e){
-    
+     
         System.out.println(""+ e.toString());
         return false;
     }

@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,7 +65,8 @@ public class ProductosDB {
     }
     catch(SQLException e){
     
-        System.out.println(""+ e.toString());
+        JOptionPane.showMessageDialog(null, "No puede eliminar este producto \n"
+                + "ya que hay articulos derivados de este");
         return false;
     }
     finally{
