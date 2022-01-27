@@ -1640,7 +1640,7 @@ public class sistema extends javax.swing.JFrame {
             resultado =1;
         }
         else{
-            uni.setNunidad(jtfNombreU.getText()+" G");
+            uni.setNunidad(jtfNombreU.getText()+" U");
         }
         if(Numeros(jtfPrecioU.getText())){
             if(!jtfPrecioU.getText().equals("")){
@@ -1837,7 +1837,7 @@ public class sistema extends javax.swing.JFrame {
             resultado =1;
         }
         else{
-            der.setNderivado(jtfNombreD.getText()+" U");
+            der.setNderivado(jtfNombreD.getText()+" G");
         }
         if(Numeros(jtfPrecioD.getText())){
             if(!jtfPrecioD.getText().equals("")){
