@@ -95,6 +95,9 @@ public class sistema extends javax.swing.JFrame {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     int udmCaja;
+    boolean pesos;
+    boolean cantidad;
+    float prepro;
     public sistema() {
         initComponents();
         //this.setResizable(false);
@@ -105,6 +108,7 @@ public class sistema extends javax.swing.JFrame {
         Dimension d=tk.getScreenSize();
         setLocation((d.width-getSize().width)/2,(d.height-getSize().height)/2);
         jlbFecha.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        lblPrecio.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         jlbUsuario.setText(""+database.name);
         jlbRol.setText(""+rol());
         if(database.rol==0){
@@ -189,9 +193,10 @@ public class sistema extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jtVenta = new javax.swing.JTable();
         jtfTotalPV = new javax.swing.JTextField();
-        jLabel40 = new javax.swing.JLabel();
+        lblPrecio = new javax.swing.JLabel();
         jcbOpciones = new javax.swing.JComboBox<>();
         btnLimpiarPV = new javax.swing.JButton();
+        jLabel50 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jtfCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -474,6 +479,18 @@ public class sistema extends javax.swing.JFrame {
 
         jtfPrecioPV.setEditable(false);
         jtfPrecioPV.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jtfPrecioPV.setForeground(new java.awt.Color(153, 0, 51));
+        jtfPrecioPV.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfPrecioPVKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfPrecioPVKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfPrecioPVKeyTyped(evt);
+            }
+        });
         jPanel3.add(jtfPrecioPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 260, -1));
 
         btnAgregarPV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/mas32.png"))); // NOI18N
@@ -543,9 +560,12 @@ public class sistema extends javax.swing.JFrame {
         });
         jPanel3.add(jtfTotalPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 490, 220, -1));
 
-        jLabel40.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel40.setText("Precio");
-        jPanel3.add(jLabel40, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        lblPrecio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblPrecio.setForeground(new java.awt.Color(153, 0, 0));
+        lblPrecio.setMaximumSize(new java.awt.Dimension(37, 15));
+        lblPrecio.setMinimumSize(new java.awt.Dimension(37, 15));
+        lblPrecio.setPreferredSize(new java.awt.Dimension(37, 15));
+        jPanel3.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 60, -1));
 
         jcbOpciones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jcbOpciones.addItemListener(new java.awt.event.ItemListener() {
@@ -562,6 +582,10 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jPanel3.add(btnLimpiarPV, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, -1, -1));
+
+        jLabel50.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel50.setText("Precio");
+        jPanel3.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         jtp.addTab("0", jPanel3);
 
@@ -772,7 +796,7 @@ public class sistema extends javax.swing.JFrame {
         jPanel2.add(jtfPiezasP, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 200, -1));
 
         jLabel32.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel32.setText("Piezas");
+        jLabel32.setText("Piezas en existencia");
         jPanel2.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 400, -1, -1));
 
         btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escoba.png"))); // NOI18N
@@ -1066,7 +1090,7 @@ public class sistema extends javax.swing.JFrame {
         jPanel6.add(jtfPrecioU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 200, -1));
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel30.setText("Piezas");
+        jLabel30.setText("Piezas contenidas");
         jPanel6.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, -1));
 
         jtfPiezasU.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -2235,17 +2259,36 @@ public class sistema extends javax.swing.JFrame {
                 if(pro.getUdm()==2){
                     jtfPrecioPV.setText(""+u.get(n).getPreciou());
                     codePV = u.get(n).getCdunidad();
+                    prepro=u.get(n).getPreciou();
+                    lblPrecio.setText("");
+                      jtfCantidadPV.requestFocus();
+                      jtfPrecioPV.setEditable(false);//Activar venta por pesos
+                      jtfCantidadPV.setEditable(true);
+                      pesos=false;
+                      cantidad=true;
                 }
                 if(pro.getUdm()==1){
-                    jtfPrecioPV.setText(""+ d.get(n).getPrecio());
                     codePV = d.get(n).getCderivado();
+                    lblPrecio.setText(""+d.get(n).getPrecio());
+                    jtfPrecioPV.setText("");
+                       jtfPrecioPV.setEditable(true);//Activar venta por pesos
+                                jtfCantidadPV.setEditable(false);
+                         jtfPrecioPV.requestFocus();
+                             pesos=true;
+                      cantidad=false;
                 }
             }
             else{
                 jtfPrecioPV.setText(""+pro.getPrecio());
                 codePV = pro.getCd();
+                     jtfCantidadPV.requestFocus();
+                      lblPrecio.setText("");
+                      jtfPrecioPV.setEditable(false);//Activar venta por pesos
+                                jtfCantidadPV.setEditable(true);
+                                     pesos=false;
+                      cantidad=true;
             }
-            jtfCantidadPV.requestFocus();
+       
         }
         catch(Exception ex){
            Logger.getLogger(""+ex);
@@ -2257,7 +2300,7 @@ public class sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfTotalPVActionPerformed
 
     private void btnVenderPVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderPVActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
         try{
         if(jtVenta.getRowCount()!=0){
                int pregunta = JOptionPane.showConfirmDialog(null, "Imprimir Ticket");
@@ -2284,7 +2327,7 @@ public class sistema extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Ingrese productos a la tabla para vender");
         }
         }
-        catch(Exception e){
+        catch(HeadlessException e){
         Logger.getLogger(""+e);
         }
     }//GEN-LAST:event_btnVenderPVActionPerformed
@@ -2312,7 +2355,14 @@ public class sistema extends javax.swing.JFrame {
             String nombre = jcbOpciones.getSelectedItem().toString();
             float cant = Float.parseFloat(jtfCantidadPV.getText());
             float precio = Float.parseFloat(jtfPrecioPV.getText());
-            float total = precio * cant;
+            float total;
+            if(pesos){
+            total=Float.parseFloat(jtfPrecioPV.getText());
+            }
+            else{
+            total = precio * cant;
+            }
+            
             itemv = itemv +1;
             tmv = (DefaultTableModel) jtVenta.getModel();
             for (int i = 0; i < jtVenta.getRowCount(); i++) {
@@ -2380,10 +2430,14 @@ public class sistema extends javax.swing.JFrame {
                 d = pdb.ConsultarDerivados(cod);
                 if (pro.getName() != null ) {
                     jtfPrecioPV.setText(""+pro.getPrecio());
+                    prepro=pro.getPrecio();
                     jtfCantidadPV.requestFocus();
                     //Carga de combobox
                     jcbOpciones.removeAllItems();
                     jcbOpciones.addItem(""+pro.getName());
+                    pesos=false;
+                    cantidad=true;
+                     lblPrecio.setText("");
                     if (pro.getUdm()==2) {
                         for (int i = 1; i < u.size(); i++) {
                             jcbOpciones.addItem(""+u.get(i).getNunidad());
@@ -2407,33 +2461,51 @@ public class sistema extends javax.swing.JFrame {
                 else if (der.getNderivado() != null) {
                     jcbOpciones.removeAllItems();
                     jcbOpciones.addItem(""+der.getNderivado());
-                    jtfCantidadPV.requestFocus();
-                    jtfPrecioPV.setText(""+der.getPrecio());
+                    jtfPrecioPV.requestFocus();
+                    //jtfPrecioPV.setText(""+der.getPrecio());
+                    jtfPrecioPV.setText("");
+                    prepro=der.getPrecio();
+                    lblPrecio.setText(""+prepro);
                     codePV = der.getCderivado();
                     udmCaja = 1;
+                    pesos = true;
+                    cantidad=false;
+                    jtfPrecioPV.setEditable(pesos);//Activar venta por pesos
+                                jtfCantidadPV.setEditable(cantidad);
                 }
                 else if (uni.getNunidad() != null) {
                     jcbOpciones.removeAllItems();
                     jtfCantidadPV.requestFocus();
                     jcbOpciones.addItem(""+uni.getNunidad());
                     jtfPrecioPV.setText(""+uni.getPreciou());
+                    lblPrecio.setText("");
+                    prepro = uni.getPreciou();
                     codePV = uni.getCdunidad();
                     udmCaja = 2;
                     jtfCantidadPV.setText("1");
+                    pesos=false;
+                    cantidad=false;
+                    jtfPrecioPV.setEditable(pesos);//Activar venta por pesos
+                                jtfCantidadPV.setEditable(cantidad);
                 }
                 else{
                     LimpiarVenta();
                     jtfCodigoPV.requestFocus();
+                    JOptionPane.showMessageDialog(null, "El producto no esta registrado", "Producto no registrado", JOptionPane.WARNING_MESSAGE);
                 }
             }else{
                 JOptionPane.showMessageDialog(null, "Ingrese el codigo de producto");
                 jtfCodigoPV.requestFocus();
 
             }
+                                
 
         }
         if(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-            LimpiarVenta();
+            jtfCodigoPV.setText("");
+            jcbOpciones.removeAllItems();
+            jtfCantidadPV.setText("");
+            jtfPrecioPV.setText("");
             jtfCodigoPV.requestFocus();
         }
     }//GEN-LAST:event_jtfCodigoPVKeyPressed
@@ -3010,6 +3082,39 @@ public class sistema extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfPiezasPActionPerformed
 
+    private void jtfPrecioPVKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioPVKeyTyped
+        // TODO add your handling code here:
+  
+    }//GEN-LAST:event_jtfPrecioPVKeyTyped
+
+    private void jtfPrecioPVKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioPVKeyPressed
+        // TODO add your handling code here
+                 if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+
+            btnAgregarPV.doClick();
+        }
+                       if (evt.getKeyCode() == KeyEvent.VK_UP) {
+
+            jtfCodigoPV.requestFocus();
+        }
+    }//GEN-LAST:event_jtfPrecioPVKeyPressed
+
+    private void jtfPrecioPVKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfPrecioPVKeyReleased
+        // TODO add your handling code here:
+                   try{
+                  if(jtfPrecioPV.getText().equals("")){
+                  jtfCantidadPV.setText("");
+                  }
+        float cant = Float.parseFloat(jtfPrecioPV.getText());
+        float total = cant/Float.parseFloat(lblPrecio.getText());
+        jtfCantidadPV.setText(String.format("%.2f", total));
+        }
+        catch(NumberFormatException ex){
+        Logger.getLogger(""+ex);
+        }
+
+    }//GEN-LAST:event_jtfPrecioPVKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -3359,6 +3464,7 @@ public class sistema extends javax.swing.JFrame {
     jtfCantidadPV.setText("");
     jtfPrecioPV.setText("");
     jtfTotalPV.setText("");
+    lblPrecio.setText("");
         }
     
     private void Tickets(){
@@ -3468,7 +3574,6 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
@@ -3479,6 +3584,7 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -3549,5 +3655,6 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JTextField jtfTotalPV;
     private javax.swing.JTextField jtfTotalR;
     private javax.swing.JTabbedPane jtp;
+    private javax.swing.JLabel lblPrecio;
     // End of variables declaration//GEN-END:variables
 }
