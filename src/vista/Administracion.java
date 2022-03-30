@@ -118,6 +118,8 @@ public class Administracion extends javax.swing.JFrame {
            int resultado = database.agregarUsuario(jtfName.getText(),jtfPassword.getText(),jcbRol.getSelectedIndex());
             if (resultado==0) {
                 JOptionPane.showMessageDialog(this,"El usuario ha sido agregado correctamente");
+                jtfName.setText("");
+                jtfPassword.setText("");
             }
             }
         } catch (SQLException ex) {

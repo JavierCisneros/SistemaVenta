@@ -127,6 +127,10 @@ public class Login extends javax.swing.JFrame {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
               jtfPassword.requestFocus();
         }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DOWN) {
+
+            jtfPassword.requestFocus();
+        }
   
     }//GEN-LAST:event_jtfUsuarioKeyPressed
 
@@ -139,6 +143,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
               btnAcceder.doClick();
+        }
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_UP) {
+
+            jtfUsuario.requestFocus();
         }
     }//GEN-LAST:event_jtfPasswordKeyPressed
 

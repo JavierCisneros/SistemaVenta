@@ -245,6 +245,7 @@ public class sistema extends javax.swing.JFrame {
         btnCodigoG = new javax.swing.JButton();
         jtfBuscarG = new javax.swing.JTextField();
         jLabel48 = new javax.swing.JLabel();
+        jlbCodigoPG = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
@@ -268,6 +269,7 @@ public class sistema extends javax.swing.JFrame {
         btnCodigoU = new javax.swing.JButton();
         jtfBuscarU = new javax.swing.JTextField();
         jLabel49 = new javax.swing.JLabel();
+        jlbCodigoPI = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -976,7 +978,7 @@ public class sistema extends javax.swing.JFrame {
                 jcbProductosKeyPressed(evt);
             }
         });
-        jPanel4.add(jcbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 210, -1));
+        jPanel4.add(jcbProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 210, -1));
 
         btnLimpiarD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/escoba.png"))); // NOI18N
         btnLimpiarD.setText("Limpiar");
@@ -1005,6 +1007,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel48.setText("Buscar:");
         jPanel4.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+        jPanel4.add(jlbCodigoPG, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 210, 20));
 
         jtp.addTab("2", jPanel4);
 
@@ -1035,7 +1038,7 @@ public class sistema extends javax.swing.JFrame {
                 jcbProductosUKeyPressed(evt);
             }
         });
-        jPanel6.add(jcbProductosU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 200, -1));
+        jPanel6.add(jcbProductosU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 200, -1));
 
         jLabel26.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel26.setText("Codigo unidad");
@@ -1191,6 +1194,7 @@ public class sistema extends javax.swing.JFrame {
 
         jLabel49.setText("Buscar:");
         jPanel6.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, -1, -1));
+        jPanel6.add(jlbCodigoPI, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 200, 20));
 
         jtp.addTab("3", jPanel6);
 
@@ -1645,7 +1649,7 @@ public class sistema extends javax.swing.JFrame {
         if(!"".equals(jcbProductosU.getSelectedItem())){
             uni.setNombre(String.valueOf(jcbProductosU.getSelectedItem()));
             uni.setCodigo(""+codigosU.get(jcbProductosU.getSelectedIndex()));
-
+            jlbCodigoPI.setText(""+codigosU.get(jcbProductosU.getSelectedIndex()));
         }
         else{
             JOptionPane.showMessageDialog(this, "Seleccione un producto base");
@@ -1842,7 +1846,7 @@ public class sistema extends javax.swing.JFrame {
         if(!"".equals(jcbProductos.getSelectedItem())){
             der.setNombre(String.valueOf(jcbProductos.getSelectedItem()));
             der.setCd(""+codigosG.get(jcbProductos.getSelectedIndex()));
-
+            jlbCodigoPG.setText(""+codigosG.get(jcbProductos.getSelectedIndex()));
         }
         else{
             JOptionPane.showMessageDialog(this, "Seleccione un producto");
@@ -2365,7 +2369,7 @@ public class sistema extends javax.swing.JFrame {
             
             itemv = itemv +1;
             tmv = (DefaultTableModel) jtVenta.getModel();
-            for (int i = 0; i < jtVenta.getRowCount(); i++) {
+           /* for (int i = 0; i < jtVenta.getRowCount(); i++) {
                 if (jtVenta.getValueAt(i, 0).equals(codePV)) {
                     JOptionPane.showMessageDialog(null, "El producto ya esta registrado");
                     LimpiarVenta();
@@ -2373,7 +2377,7 @@ public class sistema extends javax.swing.JFrame {
                     jtfCodigoPV.requestFocus();
                     return;
                 }
-            }
+            }*///Codigo para verificar que el producto no se agregue dos veces
             ArrayList lista = new ArrayList();
             lista.add(itemv);
             lista.add(codePV);
@@ -2394,7 +2398,7 @@ public class sistema extends javax.swing.JFrame {
             jtfCodigoPV.requestFocus();
         }
         else{
-            JOptionPane.showMessageDialog(null, "Ingresa la cantidad");
+            JOptionPane.showMessageDialog(null, "Ingrese el producto");
         }
         }
         catch(HeadlessException | NumberFormatException e){
@@ -2484,7 +2488,7 @@ public class sistema extends javax.swing.JFrame {
                     udmCaja = 2;
                     jtfCantidadPV.setText("1");
                     pesos=false;
-                    cantidad=false;
+                    cantidad=true;
                     jtfPrecioPV.setEditable(pesos);//Activar venta por pesos
                                 jtfCantidadPV.setEditable(cantidad);
                 }
@@ -2507,6 +2511,7 @@ public class sistema extends javax.swing.JFrame {
             jtfCantidadPV.setText("");
             jtfPrecioPV.setText("");
             jtfCodigoPV.requestFocus();
+            lblPrecio.setText("");
         }
     }//GEN-LAST:event_jtfCodigoPVKeyPressed
 
@@ -3612,6 +3617,8 @@ public class sistema extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jcbProductosU;
     private javax.swing.JComboBox<String> jcbTipo;
     private javax.swing.JComboBox<String> jcbUnidad;
+    private javax.swing.JLabel jlbCodigoPG;
+    private javax.swing.JLabel jlbCodigoPI;
     private javax.swing.JLabel jlbFecha;
     private javax.swing.JLabel jlbRol;
     private javax.swing.JLabel jlbSeccion1;
